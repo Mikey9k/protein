@@ -64,7 +64,7 @@ export default function List({items}) {
     // }, []);
 
     // const sortedCache = sortBy(cachedResults, "value").reverse();
-    const sortedFiltered = sortBy(filteredResults, "value");
+    const sortedFiltered = sortBy(filteredResults, "weight").reverse();
 
     return (
         <div>
