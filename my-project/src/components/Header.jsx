@@ -8,7 +8,12 @@ export default function Header() {
                 <GiGorilla size={70} color='white' />
                 <span className="font-bold text-white text-4xl ml-2">ProteinBuddy</span>
             </div>
-            <FilterBar />
+            <hr className="w-full border-t-1 border-white mb-4" />
+
+            <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold text-white mb-4">
+                What type of protein are you looking for?
+            </h2>
+            
         </div>
     );
 }

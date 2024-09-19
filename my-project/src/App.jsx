@@ -8,23 +8,23 @@ import List from './components/List';
 
 function App() {
 
+  const [datafromCrumb, setDataFromCrumb] = useState([]);
+
+  function handleDataFromChild(data) {
+    setDataFromCrumb(data);
+  }
+
+  // console.log(datafromCrumb);
+
   return (
     <div>
       <Header />
 
-      {/* <Card /> */}
-      <div className="card-container">
-        <div className="card-item">
-          <Cardv2 />
-        </div>
-        <div className="card-item">
-          <Cardv2 />
-        </div>
-        <div className="card-item">
-          <Cardv2 />
-        </div>
+      <div className='flex flex-col items-center'>
+        <FilterBar sendDataToParent={handleDataFromChild}/>
       </div>
-      <List />
+
+      <List items={datafromCrumb}/>
     </div>
     
   );
