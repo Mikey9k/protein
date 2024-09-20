@@ -15,7 +15,7 @@ const ResultRow = ({ providername, weight, price, value, logo, link, loading }) 
           )}
           <div className="flex-1">
             <h2 className="text-base md:text-xl font-semibold text-black">{providername}</h2>
-            <div className="mt-2 flex flex-wrap gap-2">
+            <div className="mt-2 flex flex-wrap gap-3">
               {weight && (
                 <div className="flex gap-x-1">
                   <span className="text-sm md:text-lg text-gray-500">
@@ -28,18 +28,18 @@ const ResultRow = ({ providername, weight, price, value, logo, link, loading }) 
               {price && (
                 <div className="flex gap-x-1">
                   <span className="text-sm md:text-lg text-gray-500">
-                    {price}
+                    {price.toFixed(2)}
                   </span>
-                  <span className="text-xs md:text-base text-gray-400">USD</span>
+                  <span className="text-xs md:text-base text-gray-400">$</span>
                 </div>
               )}
 
               {value && (
                 <div className="flex gap-x-1">
                   <span className="text-sm md:text-lg text-gray-500">
-                    {value}
+                    {value.toFixed(2)}
                   </span>
-                  <span className="text-xs md:text-base text-gray-400">value</span>
+                  <span className="text-xs md:text-base text-gray-400">Cost per 100g</span>
                 </div>
               )}
             </div>

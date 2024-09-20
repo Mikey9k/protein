@@ -29,15 +29,17 @@ export default function FilterBar({sendDataToParent}) {
                     <div className="dropdown-item" onClick={() => handleSelect1('Chocolate')}>Chocolate</div>
                     <div className="dropdown-item" onClick={() => handleSelect1('Vanilla')}>Vanilla</div>
                     <div className="dropdown-item" onClick={() => handleSelect1('Banana')}>Banana</div>
+                    <div className="dropdown-item" onClick={() => handleSelect1('All')}>All</div>
+
                 </div>
             </div>
 
             <div className="dropdown-container">
                 <div className="dropdown-display">{selectedOption2}</div>
                 <div className="dropdown-menu">
-                    <div className="dropdown-item" onClick={() => handleSelect2('Whey')}>Whey Protein</div>
-                    <div className="dropdown-item" onClick={() => handleSelect2('Collagen')}>Collagen Protein</div>
-                    {/* <div className="dropdown-item" onClick={() => handleSelect2('Option 3')}>Option 3</div> */}
+                    <div className="dropdown-item" onClick={() => handleSelect2('Whey Protein')}>Whey Protein</div>
+                    <div className="dropdown-item" onClick={() => handleSelect2('Plant Protein')}>Plant Protein</div>
+                    <div className="dropdown-item" onClick={() => handleSelect2('All')}>All</div>
                 </div>
             </div>
 

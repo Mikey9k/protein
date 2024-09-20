@@ -1,7 +1,7 @@
 import React from 'react';
 import './Cardv2.css';
 
-export default function Cardv2({ providername, weight, price, value, logo, link, loading }) {
+export default function Cardv2({ providername, weight, price, value, logo, link, flavour, category, rating }) {
     return (
         <a href={link} target="_blank">
             <div className="card-wrapper">
@@ -17,35 +17,34 @@ export default function Cardv2({ providername, weight, price, value, logo, link,
                         </svg>
                     </button>
 
-                    <div className="rounded-lg p-4 bg-gray-300 flex flex-col content-overlap">
+                    <div className="rounded-lg p-4 bg-gray-300 flex flex-col content-overlap" style={{ width: '300px', height: '240px', overflow: 'hidden' }}>
                         <div>
                             <h6 className="text-gray-600 text-l font-bold leading-none mb-2">
                                 {providername}
                             </h6>
                             <h5 className="text-gray text-3xl font-bold leading-none">
-                                ${price}
+                                ${price.toFixed(2)}
                             </h5>
                             <span className="text-xs text-gray-450 leading-none font-light">
-                                {value} per 100g | {weight} grams 
+                                ${value.toFixed(2)} per 100g | {weight} grams 
                             </span>
                             <br></br>
                             <br></br>
                             <br></br>
                         
                             <div className="bubbles leading-none">
-                                <div className="bubbleflav">Chocolate</div>
-                                <div className="bubbletype">Pea</div>
+                                <div className="bubbleflav">{flavour}</div>
+                                <div className="bubbletype">{category}</div>
                             </div>
                             
                             <div className="absolute bottom-3 right-3 flex items-center">
                                 <div className="text-black text-s font-bold rounded-full mr-1">
-                                    4.8
+                                    {rating}
                                 </div>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="black" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="stroke-current">
                                     <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 1.91 9.27 8.91 8.26 12 2"></polygon>
                                 </svg>
                             </div>
-
                         </div>
                     </div>
                 </div>

@@ -28,17 +28,36 @@ export default function List({items}) {
     };
 
 
-
+    const category = {
+        "Whey Protein": "Whey",
+        "Plant Protein": "Plant",
+    }
+    const flavour = {
+        "Chocolate": "Chocolate",
+        "Vanilla": "Vanilla",
+        "Banana": "Banana",
+    }
     console.log(items);
     let filterString = "";
+
+    if (items[0] == "All") {
+        items[0] = "Pick A Flavour";
+    }
+    if (items[1] == "All") {
+        items[1] = "Pick a Category";
+    }
     if (items[0] == undefined && items[1] == undefined) {
         // Pick a category
-    } else if (items[0] == "Pick A Flavour") {
-        filterString += `?category=${items[1]}`;
-    } else if (items[1] == "Pick a Category") {
-        filterString += `?flavour=${items[0]}`;
+    } else if (items[0] == "Pick A Flavour" ) {
+        if (items[1] !== "Pick a Category") {
+            filterString += `?category=${category[items[1]]}`;
+        }
+    } else if (items[1] == "Pick a Category" ) {
+        if (items[0] !== "Pick a Flavour") {
+            filterString += `?flavour=${flavour[items[0]]}`;
+        }
     } else {
-        filterString += `?flavour=${items[0]}&category=${items[1]}`;
+        filterString += `?flavour=${flavour[items[0]]}&category=${category[items[1]]}`;
     }
 
     // console.log(filterString);
@@ -69,7 +88,7 @@ export default function List({items}) {
     const formatDateToAEST = (date) => {
         const timeZone = 'Australia/Sydney';
         const zonedDate = toZonedTime(new Date(date), timeZone);
-        return format(zonedDate, 'yyyy-MM-dd HH:mm:ssXXX', { timeZone });
+        return format(zonedDate, 'dd MMMM yyyy hh:mm:ss aXXX', { timeZone });
     };
 
     // useEffect(() => {
@@ -184,6 +203,9 @@ export default function List({items}) {
                                             value={result.value}
                                             logo={result.image}
                                             link={result.url}
+                                            flavour={result.flavour}
+                                            category={result.category}
+                                            rating={result.rating}
                                         />
                                     </div>
                                 </div>
