@@ -1,0 +1,88 @@
+/* FilterBar.css */
+.sorted-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.sorted-bar:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.dropdown-container {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    max-width: 300px;
+    min-width: 200px; /* Ensure minimum width to keep text on one row */
+}
+
+.dropdown-display {
+    background-color: #f2f2f2;
+    padding: 10px;
+    border-radius: 20px;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.dropdown-display:hover {
+    border-color: #007bff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    width: 100%;
+    z-index: 1;
+}
+
+.dropdown-container:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-item {
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    border-bottom: 1px solid #ccc;
+}
+
+.dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.dropdown-item:hover {
+    background-color: #f2f2f2;
+}
+
+@media (min-width: 768px) {
+    .sorted-bar {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .dropdown-container {
+        max-width: none;
+        flex: 1;
+    }
+}
+
+.top-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 16px; /* Adjust as needed */
+}
+
