@@ -229,6 +229,9 @@ export default function List({items}) {
                                         value={result.value}
                                         logo={result.image}
                                         link={result.url}
+                                        flavour={result.flavour}
+                                        category={result.category}
+                                        rating={result.rating}
                                     />
                                 </div>
                             </div>

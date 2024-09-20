@@ -7,7 +7,7 @@ export default function Cardv2({ providername, weight, price, value, logo, link,
             <div className="card-wrapper">
                 <div className="nft bg-white rounded-lg m-h-64">
                     <figure className="image-container">
-                        <img src={logo} alt="" className="ml-auto mr-auto" />
+                        <img src={logo} alt="" className="ml-auto mr-auto zoom-out" />
                     </figure>
 
                     <button className="absolute top-3 right-3 rounded-full bg-gray-800 text-white hover:bg-white hover:text-purple-900 hover:shadow-xl focus:outline-none w-5 h-5 flex transition duration-300">
