@@ -39,7 +39,7 @@ export default function Cardv2({ providername, weight, price, value, logo, link,
                             
                             <div className="absolute bottom-3 right-3 flex items-center">
                                 <div className="text-black text-s font-bold rounded-full mr-1">
-                                    {rating}
+                                    {rating.toFixed(1)}
                                 </div>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="black" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="stroke-current">
                                     <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 1.91 9.27 8.91 8.26 12 2"></polygon>

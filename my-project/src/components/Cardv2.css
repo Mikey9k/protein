@@ -13,27 +13,18 @@
     transition: .5s all;
     
 
-    ::before{
-      position: fixed;
-      content: "";
-      box-shadow: 0 0 100px 40px #ffffff08;
-      top: -10%;
-      left: -100%;
-      transform: rotate(-45deg);
-      height: 60rem;
-      transition: .7s all;
-    }
+
     &:hover{
       border: 1px solid #ffffff44;
-      box-shadow: 0 7px 50px 10px #000000aa;
+      box-shadow: 0 7px 13px 9px #ffffffaa;
       /* transform: scale(1.015); */
-      filter: brightness(1.03);
+      /* filter: brightness(1.03);
       ::before{
         filter: brightness(.5);
         top: -100%;
         left: 200%;
-      }
-    }
+      }  */
+    } 
 }
 
 .bubbles {
@@ -72,6 +63,6 @@
 }
 
 .zoom-out {
-  transform: scale(0.8); /* Adjust the scale value as needed */
-  transition: transform 0.3s ease;
+    transform: scale(0.8); /* Adjust the scale value as needed */
+    transition: transform 0.3s ease;
 }

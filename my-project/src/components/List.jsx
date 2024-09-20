@@ -208,7 +208,7 @@ export default function List({items}) {
                         </div>
 
                         {sortedFiltered.slice(0, 10).map((result, index) => (
-                            <div key={result._id} className="flex items-center space-x-4 max-w-full overflow-hidden">
+                            <div key={result._id} className="flex items-center space-x-4 max-w-full">
                                 <div className="w-8 flex justify-center items-center">
                                     {index === 0 && <span className="text-5xl">&#129351;</span>}
                                     {index === 1 && <span className="text-4xl">&#129352;</span>}
