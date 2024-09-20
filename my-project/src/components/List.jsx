@@ -188,13 +188,8 @@ export default function List({items}) {
                     <div>
                         <div className="card-container">
                             {sortedFiltered.slice(0, 3).map((result, index) => (
-                                <div key={result._id} className="flex items-center space-x-4">
-                                    {/* <div className="w-8 flex justify-center items-center">
-                                        {index === 0 && <span className="text-5xl">&#129351;</span>}
-                                        {index === 1 && <span className="text-4xl">&#129352;</span>}
-                                        {index === 2 && <span className="text-4xl">&#129353;</span>}
-                                        {index > 2 && <span className="text-2xl font-bold">{index + 1}</span>}
-                                    </div> */}
+                                <div key={result._id} className="relative flex items-center space-x-4">
+
                                     <div className="card-item flex-1">
                                         <Cardv2
                                             providername={result.title}
@@ -212,16 +207,15 @@ export default function List({items}) {
                             ))}
                         </div>
 
-
                         {sortedFiltered.slice(0, 10).map((result, index) => (
-                            <div key={result._id} className="flex items-center space-x-4">
+                            <div key={result._id} className="flex items-center space-x-4 max-w-full overflow-hidden">
                                 <div className="w-8 flex justify-center items-center">
                                     {index === 0 && <span className="text-5xl">&#129351;</span>}
                                     {index === 1 && <span className="text-4xl">&#129352;</span>}
                                     {index === 2 && <span className="text-4xl">&#129353;</span>}
                                     {index > 2 && <span className="text-2xl font-bold">{index + 1}</span>}
                                 </div>
-                                <div className="flex-1 result-row">
+                                <div className="flex-1 min-w-0">
                                     <ResultRow
                                         providername={result.title}
                                         weight={result.weight}
@@ -238,6 +232,7 @@ export default function List({items}) {
                         ))}
                     </div>
                 )}
+
 
 
             </div>
