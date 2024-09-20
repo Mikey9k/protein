@@ -3,6 +3,12 @@
 import React from 'react';
 
 const ResultRow = ({ providername, weight, price, value, logo, link, flavour, category }) => {
+
+  function truncateText(text) {
+    return text.length > 85 ? text.substring(0, 85) + "..." : text;
+  }
+    
+  let title = truncateText(providername);
   return (
     <a href={link} target="_blank" rel="noopener noreferrer">
       <div className="result-row relative border min-h-[64px] rounded-lg bg-gray-200 p-4 my-2 transition-all duration-300 shadow-xl">
@@ -13,7 +19,7 @@ const ResultRow = ({ providername, weight, price, value, logo, link, flavour, ca
             </div>
           )}
           <div className="flex-1">
-            <h2 className="text-base md:text-xl font-semibold text-black">{providername}</h2>
+            <h2 className="text-base md:text-xl font-semibold text-black">{title}</h2>
             <div className="mt-2 flex flex-wrap gap-3">
               {weight && (
                 <div className="flex gap-x-1">

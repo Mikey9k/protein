@@ -20,7 +20,7 @@ export default function List({items}) {
     const [filteredResults, setFilteredResults] = useState([]);
     const [loading, setLoading] = useState(true);
     const [empty, setEmpty] = useState(false);
-    const [selectedOption1, setSelectedOption1] = useState('Lowest Unit Price');
+    const [selectedOption1, setSelectedOption1] = useState('Sort By');
   
 
     const handleSelect1 = (option) => {
@@ -138,14 +138,16 @@ export default function List({items}) {
                     <CardTemplate />
                     </div>
                 </div> */}
-                <div className="filter-bar top-right">
-                    <div>Sort By:</div>
-                    <div className="dropdown-container">
-                        <div className="dropdown-display">{selectedOption1}</div>
-                        <div className="dropdown-menu">
-                            <div className="dropdown-item" onClick={() => handleSelect1('Lowest Unit Price')}>Lowest Unit Price</div>
-                            <div className="dropdown-item" onClick={() => handleSelect1('Price (Low to high)')}>Price (Low to high)</div>
-                            <div className="dropdown-item" onClick={() => handleSelect1('Price (High to low)')}>Price (High to low)</div>
+                <div className='flex flex-col items-center'>
+                        
+                    <div className="filter-bar">
+                        <div className="dropdown-container">
+                            <div className="dropdown-display">{selectedOption1}</div>
+                            <div className="dropdown-menu">
+                                <div className="dropdown-item" onClick={() => handleSelect1('Lowest Unit Price')}>Lowest Unit Price</div>
+                                <div className="dropdown-item" onClick={() => handleSelect1('Price (Low to high)')}>Price (Low to high)</div>
+                                <div className="dropdown-item" onClick={() => handleSelect1('Price (High to low)')}>Price (High to low)</div>
+                            </div>
                         </div>
                     </div>
                 </div>

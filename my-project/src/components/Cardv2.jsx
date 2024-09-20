@@ -2,6 +2,18 @@ import React from 'react';
 import './Cardv2.css';
 
 export default function Cardv2({ providername, weight, price, value, logo, link, flavour, category, rating }) {
+    let rating_parsed = undefined;
+    if (rating !== undefined) {
+        rating_parsed = rating.toFixed(1);
+    }
+
+    function truncateText(text) {
+        return text.length > 65 ? text.substring(0, 65) + "..." : text;
+    }
+      
+    let title = truncateText(providername);
+      
+    
     return (
         <a href={link} target="_blank">
             <div className="card-wrapper">
@@ -20,7 +32,7 @@ export default function Cardv2({ providername, weight, price, value, logo, link,
                     <div className="rounded-lg p-4 bg-gray-300 flex flex-col content-overlap" style={{ width: '300px', height: '240px', overflow: 'hidden' }}>
                         <div>
                             <h6 className="text-gray-600 text-l font-bold leading-none mb-2">
-                                {providername}
+                                {title}
                             </h6>
                             <h5 className="text-gray text-3xl font-bold leading-none">
                                 ${price.toFixed(2)}
@@ -39,7 +51,7 @@ export default function Cardv2({ providername, weight, price, value, logo, link,
                             
                             <div className="absolute bottom-3 right-3 flex items-center">
                                 <div className="text-black text-s font-bold rounded-full mr-1">
-                                    {rating.toFixed(1)}
+                                    {rating_parsed}
                                 </div>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="black" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="stroke-current">
                                     <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 1.91 9.27 8.91 8.26 12 2"></polygon>
