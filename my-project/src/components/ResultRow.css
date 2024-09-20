@@ -5,8 +5,16 @@
     margin: 0 auto;
 }
 
+/* ResultRow.css */
+.list-container {
+    /* width: 100%; */
+    /* max-width: 75%; */
+    margin: 0 auto;
+}
+
+
 @media (min-width: 1024px) {
-    .result-row {
+    .list-container {
         max-width: 75%;
     }
 }

@@ -124,7 +124,7 @@ export default function List({items}) {
     return (
         <div>
 
-            <div className="result-row p-4 rounded-lg block relative border border-white/20 shadow-xl mt-8">
+            <div className="list-container p-4 rounded-lg block relative border border-white/20 shadow-xl mt-8">
 
                       {/* <Card /> */}
                 {/* <div className="card-container">
@@ -221,7 +221,7 @@ export default function List({items}) {
                                     {index === 2 && <span className="text-4xl">&#129353;</span>}
                                     {index > 2 && <span className="text-2xl font-bold">{index + 1}</span>}
                                 </div>
-                                <div className="flex-1">
+                                <div className="flex-1 result-row">
                                     <ResultRow
                                         providername={result.title}
                                         weight={result.weight}
