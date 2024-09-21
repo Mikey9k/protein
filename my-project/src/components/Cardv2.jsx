@@ -1,18 +1,26 @@
 import React from 'react';
 import './Cardv2.css';
 
-export default function Cardv2({ providername, weight, price, value, logo, link, flavour, category, rating }) {
+export default function Cardv2({ providername, weight, price, value, logo, link, flavour, category, rating, rank }) {
     let rating_parsed = undefined;
     if (rating !== undefined) {
         rating_parsed = rating.toFixed(1);
     }
 
     function truncateText(text) {
-        return text.length > 65 ? text.substring(0, 65) + "..." : text;
+        return text.length > 45 ? text.substring(0, 45) + "..." : text;
     }
       
     let title = truncateText(providername);
-      
+    function getMedalEmoji(rank) {
+        if (rank === 1) return '\u{1F947}'; // 🥇
+        if (rank === 2) return '\u{1F948}'; // 🥈
+        if (rank === 3) return '\u{1F949}'; // 🥉
+        return '';
+    }
+
+
+
     
     return (
         <a href={link} target="_blank">
@@ -29,10 +37,23 @@ export default function Cardv2({ providername, weight, price, value, logo, link,
                         </svg>
                     </button>
 
-                    <div className="rounded-lg p-4 bg-gray-300 flex flex-col content-overlap" style={{ width: '300px', height: '240px', overflow: 'hidden' }}>
+                    <h2 className='absolute top-3 left-3'>
+                        <span style={{ fontSize: '2em' }}>{getMedalEmoji(rank)}</span>
+                    </h2>
+
+
+
+                    <div className="rounded-lg p-4 bg-gray-300 flex flex-col content-overlap" style={{ width: '300px', height: '210px', overflow: 'hidden' }}>
                         <div>
-                            <h6 className="text-gray-600 text-l font-bold leading-none mb-2">
-                                {title}
+                            <h6 className="text-gray-600 text-l font-bold leading-none mb-2 flex">
+                                {rank !== undefined && (
+                                    <div className="flex items-center bg-blue-100 text-blue-800 text-s font-semibold mr-2 px-2.5 py-0.5 rounded" style={{ width: '50px', height: '24px' }}>
+                                        <span>#{rank}</span>
+                                    </div>
+                                )}
+                                <div className="flex-grow">
+                                    {title}
+                                </div>
                             </h6>
                             <h5 className="text-gray text-3xl font-bold leading-none">
                                 ${price.toFixed(2)}
@@ -49,14 +70,17 @@ export default function Cardv2({ providername, weight, price, value, logo, link,
                                 <div className="bubbletype">{category}</div>
                             </div>
                             
-                            <div className="absolute bottom-3 right-3 flex items-center">
-                                <div className="text-black text-s font-bold rounded-full mr-1">
-                                    {rating_parsed}
+                            {rating_parsed !== undefined && (
+                                <div className="absolute bottom-3 right-3 flex items-center">
+                                    <div className="text-black text-s font-bold rounded-full mr-1">
+                                        {rating_parsed}
+                                    </div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="black" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="stroke-current">
+                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 1.91 9.27 8.91 8.26 12 2"></polygon>
+                                    </svg>
                                 </div>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="black" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="stroke-current">
-                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 1.91 9.27 8.91 8.26 12 2"></polygon>
-                                </svg>
-                            </div>
+                            )}
+
                         </div>
                     </div>
                 </div>

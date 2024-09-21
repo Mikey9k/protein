@@ -29,8 +29,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 128px; /* Adjust the width as needed */
-    height: 128px; /* Adjust the height as needed */
+    width: 20vw; /* Dynamic width based on viewport width */
+    height: 20vw; /* Dynamic height to keep it a square */
+    max-width: 96px; /* Maximum width */
+    max-height: 96px; /* Maximum height */
 }
 
 .image1 {
@@ -40,8 +42,26 @@
     object-fit: cover;
 }
 
+/* ResultRow.css */
+.image-responsive {
+    width: 20vw; /* Dynamic width based on viewport width */
+    height: 20vw; /* Dynamic height to keep it a square */
+    max-width: 96px; /* Maximum width */
+    max-height: 96px; /* Maximum height */
+    border-radius: 8px; /* Adjust the radius as needed */
+}
+
+@media (min-width: 768px) {
+    .image-responsive {
+        width: 12vw; /* Adjust width for larger screens */
+        height: 12vw; /* Adjust height to keep it a square */
+        max-width: 96px; /* Maximum width for larger screens */
+        max-height: 96px; /* Maximum height for larger screens */
+    }
+}
+
 .zoom-out1 {
-    transform: scale(0.9); /* Adjust the scale value as needed */
+    transform: scale(0.8);
     transition: transform 0.3s ease;
 }
 
