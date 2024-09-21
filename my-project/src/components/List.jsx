@@ -119,7 +119,39 @@ export default function List({items}) {
         // setEmpty(true);
     }
 
-    console.log(empty);
+    const [currentPage, setCurrentPage] = useState(1);
+    const recordsPerPage = 12;
+
+    const totalPages = Math.ceil(sortedFiltered.length / recordsPerPage);
+
+    const handleNextPage = () => {
+        if (currentPage < totalPages) {
+            setCurrentPage(currentPage + 1);
+        }
+    };
+
+    const handlePreviousPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1);
+        }
+    };
+
+    const handlePageClick = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    };
+
+    const currentRecords = sortedFiltered.slice(
+        (currentPage - 1) * recordsPerPage + 3,
+        currentPage * recordsPerPage + 3
+    );
+
+    const getPageNumbers = () => {
+        const pages = [];
+        for (let i = Math.max(1, currentPage - 1); i <= Math.min(totalPages, currentPage + 1); i++) {
+            pages.push(i);
+        }
+        return pages;
+    };
 
     return (
         <div>
@@ -210,30 +242,77 @@ export default function List({items}) {
                             ))}
                         </div>
 
-                        {sortedFiltered.slice(3, 15).map((result, index) => (
-                            <div key={result._id} className="flex items-center space-x-4 max-w-full">
-                                {/* <div className="w-8 flex justify-center items-center">
-                                    {index === 0 && <span className="text-5xl">&#129351;</span>}
-                                    {index === 1 && <span className="text-4xl">&#129352;</span>}
-                                    {index === 2 && <span className="text-4xl">&#129353;</span>}
-                                    {index > 2 && <span className="text-2xl font-bold">{index + 1}</span>}
-                                </div> */}
-                                <div className="flex-1 min-w-0">
-                                    <ResultRow
-                                        providername={result.title}
-                                        weight={result.weight}
-                                        price={result.currentPrice}
-                                        value={result.value}
-                                        logo={result.image}
-                                        link={result.url}
-                                        flavour={result.flavour}
-                                        category={result.category}
-                                        rating={result.rating}
-                                        rank={index + 4}
-                                    />
+
+                        <div className="courier flex justify-center mt-4 space-x-2">
+                            {currentPage > 1 && (
+                                <button
+                                    onClick={handlePreviousPage}
+                                    className="px-4 py-2 bg-white text-[#0082cd] shadow-md hover:shadow-2xl transition-shadow duration-300"
+                                >
+                                    Previous
+                                </button>
+                            )}
+                            {getPageNumbers().map((pageNumber) => (
+                                <button
+                                    key={pageNumber}
+                                    onClick={() => handlePageClick(pageNumber)}
+                                    className={`px-4 py-2 ${pageNumber === currentPage ? 'bg-blue-700 text-white' : 'text-[#0082cd] bg-white shadow-md hover:shadow-2xl transition-shadow duration-300'}`}
+                                >
+                                    {pageNumber}
+                                </button>
+                            ))}
+                            {currentPage < totalPages && (
+                                <button
+                                    onClick={handleNextPage}
+                                    className="px-4 py-2 bg-white text-[#0082cd] shadow-md hover:shadow-2xl transition-shadow duration-300"
+                                >
+                                    Next
+                                </button>
+                            )}
+                        </div>
+
+                        <br></br>
+
+                        <div>
+                            {currentRecords.map((result, index) => (
+                                <div key={result._id} className="flex items-center space-x-4 max-w-full">
+                                    <div className="flex-1 min-w-0">
+                                        <ResultRow
+                                            providername={result.title}
+                                            weight={result.weight}
+                                            price={result.currentPrice}
+                                            value={result.value}
+                                            logo={result.image}
+                                            link={result.url}
+                                            flavour={result.flavour}
+                                            category={result.category}
+                                            rating={result.rating}
+                                            rank={(currentPage - 1) * recordsPerPage + index + 4}
+                                        />
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
+                            ))}
+
+
+                            {/* <div className="flex justify-center mt-4 space-x-2">
+                                {currentPage > 1 && (
+                                    <button
+                                        onClick={handlePreviousPage}
+                                        className="px-4 py-2 bg-blue-500 text-white hover:bg-blue-600"
+                                    >
+                                        Previous
+                                    </button>
+                                )}
+                                {currentPage < totalPages && (
+                                    <button
+                                        onClick={handleNextPage}
+                                        className="px-4 py-2 bg-blue-500 text-white hover:bg-blue-600"
+                                    >
+                                        Next
+                                    </button>
+                                )}
+                            </div> */}
+                        </div>
                     </div>
                 )}
 
