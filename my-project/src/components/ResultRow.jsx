@@ -48,7 +48,7 @@ const ResultRow = ({ providername, weight, price, value, logo, link, flavour, ca
             </div>
 
             <div className="mt-4 flex flex-wrap gap-3">
-              <div className="bubbles1 leading-none">
+              <div className="bubbles1">
                   <div className="bubbleflav">{flavour}</div>
                   <div className="bubbletype">{category}</div>
               </div>

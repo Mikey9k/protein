@@ -36,6 +36,7 @@ export default function List({items}) {
         "Chocolate": "Chocolate",
         "Vanilla": "Vanilla",
         "Banana": "Banana",
+        "Unflavoured": "Unflavoured",
     }
     console.log(items);
     let filterString = "";
