@@ -249,6 +249,7 @@ export default function List({items}) {
                                 <button
                                     onClick={handlePreviousPage}
                                     className="px-4 py-2 bg-white text-[#0082cd] shadow-md hover:shadow-2xl transition-shadow duration-300"
+                                    style={{ zIndex: 10 }}
                                 >
                                     Previous
                                 </button>
@@ -258,6 +259,7 @@ export default function List({items}) {
                                     key={pageNumber}
                                     onClick={() => handlePageClick(pageNumber)}
                                     className={`px-4 py-2 ${pageNumber === currentPage ? 'bg-blue-700 text-white' : 'text-[#0082cd] bg-white shadow-md hover:shadow-2xl transition-shadow duration-300'}`}
+                                    style={{ zIndex: 10 }}
                                 >
                                     {pageNumber}
                                 </button>
@@ -266,6 +268,7 @@ export default function List({items}) {
                                 <button
                                     onClick={handleNextPage}
                                     className="px-4 py-2 bg-white text-[#0082cd] shadow-md hover:shadow-2xl transition-shadow duration-300"
+                                    style={{ zIndex: 10 }}
                                 >
                                     Next
                                 </button>
