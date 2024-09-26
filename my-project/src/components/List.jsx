@@ -449,7 +449,7 @@ export default function List({items}) {
             </div>
 
             <div className='mt-6'>
-                <h2 className="text-2xl font-semibold text-center">
+                <h2 className="text-2xl text-white font-semibold text-center">
                 Latest Record Updated At: {latest ? formatDateToAEST(latest) : 'Not yet updated'}
                 </h2>
             </div>
