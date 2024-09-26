@@ -5,7 +5,7 @@
 
 .result-row:hover {
     border: 1px solid #ffffff44;
-    box-shadow: 0 0 40px #ffffffaa;
+    box-shadow: 0 0 10px #ffffffaa;
 }
 
 /* ResultRow.css */
@@ -72,3 +72,24 @@
     display: flex;
     gap: 10px;
 }
+
+.sitebubble {
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sitebubble:hover {
+    background-color: #e0f7fa; /* Light cyan background on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
+}
+
+.separator {
+    border: 0;
+    height: 1px;
+    background: #ccc;
+    margin: 20px 0;
+  }

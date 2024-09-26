@@ -14,6 +14,12 @@ import CardTemplate from './CardTemplate';
 import { GiPassport } from 'react-icons/gi';
 import './SortedBar.css';
 
+// Create a mapping object for retailer names and their logos
+const retailerLogos = {
+    'Amazon': 'https://amazonau.gcs-web.com/sites/g/files/knoqqb24876/themes/site/nir_pid2259/dist/images/Amazon-logo-RGB-COLOR-HALF-01.png',
+    // Add more retailer names and their logos as needed
+};
+
 export default function List({items}) {
     const [latest, setLatest] = useState("");
     const [cachedResults,setCachedResults] = useState([]);
@@ -38,7 +44,31 @@ export default function List({items}) {
         "Banana": "Banana",
         "Unflavoured": "Unflavoured",
     }
-    console.log(items);
+
+    const title = [...items];
+    console.log(title);
+
+    if (title.length === 0) {
+        //
+    } else {
+        console.log("mumma")
+        if (title[0] === "Pick A Flavour") {
+            title[0] = "";
+            title[1] = category[title[1]];
+        } else if (title[1] === "Pick a Category") {
+            
+            title[1] = "";
+            console.log(title);
+        } else {
+            title[1] = category[title[1]];
+        }
+        
+    }
+
+
+
+
+    // console.log(items);
     let filterString = "";
 
     if (items[0] == "All") {
@@ -69,7 +99,7 @@ export default function List({items}) {
         axios.get(`https://proteinbuddy.onrender.com/record/products${filterString}`)
           .then(res => {
             setFilteredResults(res.data);
-            console.log(res.data);
+            // console.log(res.data);
             setLoading(false);
             if (res.data === "No records found") {
                 setEmpty(true);
@@ -120,6 +150,9 @@ export default function List({items}) {
         // setEmpty(true);
     }
 
+    let valueFiltered = sortBy(filteredResults, "value");
+    let reviewFiltered = sortBy(filteredResults, "reviews");
+
     const [currentPage, setCurrentPage] = useState(1);
     const recordsPerPage = 12;
 
@@ -142,8 +175,8 @@ export default function List({items}) {
     };
 
     const currentRecords = sortedFiltered.slice(
-        (currentPage - 1) * recordsPerPage + 3,
-        currentPage * recordsPerPage + 3
+        (currentPage - 1) * recordsPerPage,
+        currentPage * recordsPerPage
     );
 
     const getPageNumbers = () => {
@@ -171,7 +204,7 @@ export default function List({items}) {
                     <CardTemplate />
                     </div>
                 </div> */}
-                <div className='flex flex-col items-center'>
+                {/* <div className='flex flex-col items-center'>
                         
                     <div className="filter-bar">
                         <div className="dropdown-container">
@@ -183,14 +216,11 @@ export default function List({items}) {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
 
-                <br></br>
-                <br></br>
-                <br></br>
 
                 {loading && (
-                    <div className="loading-indicator flex flex-col justify-center items-center space-y-2 mt-16">
+                    <div className="loading-indicator flex flex-col justify-center items-center space-y-2 mt-4 mb-4">
                         <div className="w-8 h-8 border-4 border-blue-500 border-solid border-t-transparent rounded-full animate-spin"></div>
                         <p className="text-blue-500 font-medium">Loading...</p>
                     </div>
@@ -221,8 +251,15 @@ export default function List({items}) {
 
                 {!loading && (
                     <div>
+
+                        <div className="heading-container">
+                            <h2 className="heading">
+                                &#x1F4B5; Best Value {title[0]} {title[1]} Protein
+                            </h2>
+                        </div>
+                        
                         <div className="card-container">
-                            {sortedFiltered.slice(0, 3).map((result, index) => (
+                            {valueFiltered.slice(0, 3).map((result, index) => (
                                 <div key={result._id} className="relative flex items-center space-x-4">
 
                                     <div className="card-item flex-1">
@@ -237,6 +274,36 @@ export default function List({items}) {
                                             category={result.category}
                                             rating={result.rating}
                                             rank={index + 1}
+                                            retailer={retailerLogos[result.retailer]}
+                                        />
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className="heading-container">
+                            <h2 className="heading">
+                                &#x1F4AA; Best Rated {title[0]} {title[1]} Protein
+                            </h2>
+                        </div>
+
+                        <div className="card-container">
+                            {reviewFiltered.slice(0, 3).map((result, index) => (
+                                <div key={result._id} className="relative flex items-center space-x-4">
+
+                                    <div className="card-item flex-1">
+                                        <Cardv2
+                                            providername={result.title}
+                                            weight={result.weight}
+                                            price={result.currentPrice}
+                                            value={result.value}
+                                            logo={result.image}
+                                            link={result.url}
+                                            flavour={result.flavour}
+                                            category={result.category}
+                                            rating={result.rating}
+                                            rank={index + 1}
+                                            retailer={retailerLogos[result.retailer]}
                                         />
                                     </div>
                                 </div>
@@ -244,7 +311,7 @@ export default function List({items}) {
                         </div>
 
 
-                        <div className="courier flex justify-center mt-4 space-x-2">
+                        {/* <div className="courier flex justify-center mt-4 space-x-2">
                             {currentPage > 1 && (
                                 <button
                                     onClick={handlePreviousPage}
@@ -273,7 +340,63 @@ export default function List({items}) {
                                     Next
                                 </button>
                             )}
+                        </div> */}
+
+                        <br></br>
+                        {/* <hr className="white-separator" /> */}
+
+                        <div className="heading-container">
+                            <h2 className="heading">
+                                &#128269; Browse {title[0]} {title[1]} Protein
+                            </h2>
                         </div>
+
+                        <br></br>
+                        
+                        <div className='flex flex-col items-center'>
+                            <div className="flex justify-center items-center w-full space-x-4">
+                                <div className="filter-bar">
+                                <div className="dropdown-container">
+                                    <div className="dropdown-display">{selectedOption1}</div>
+                                    <div className="dropdown-menu">
+                                    <div className="dropdown-item" onClick={() => handleSelect1('Lowest Unit Price')}>Lowest Unit Price</div>
+                                    <div className="dropdown-item" onClick={() => handleSelect1('Price (Low to high)')}>Price (Low to high)</div>
+                                    <div className="dropdown-item" onClick={() => handleSelect1('Price (High to low)')}>Price (High to low)</div>
+                                    </div>
+                                </div>
+                                </div>
+                                <div className="courier flex justify-center space-x-2">
+                                {currentPage > 1 && (
+                                    <button
+                                    onClick={handlePreviousPage}
+                                    className="px-4 py-2 bg-white text-[#0082cd] shadow-md hover:shadow-2xl transition-shadow duration-300"
+                                    style={{ zIndex: 10 }}
+                                    >
+                                    Previous
+                                    </button>
+                                )}
+                                {getPageNumbers().map((pageNumber) => (
+                                    <button
+                                    key={pageNumber}
+                                    onClick={() => handlePageClick(pageNumber)}
+                                    className={`px-4 py-2 ${pageNumber === currentPage ? 'bg-blue-700 text-white' : 'text-[#0082cd] bg-white shadow-md hover:shadow-2xl transition-shadow duration-300'}`}
+                                    style={{ zIndex: 10 }}
+                                    >
+                                    {pageNumber}
+                                    </button>
+                                ))}
+                                {currentPage < totalPages && (
+                                    <button
+                                    onClick={handleNextPage}
+                                    className="px-4 py-2 bg-white text-[#0082cd] shadow-md hover:shadow-2xl transition-shadow duration-300"
+                                    style={{ zIndex: 10 }}
+                                    >
+                                    Next
+                                    </button>
+                                )}
+                                </div>
+                            </div>
+                            </div>
 
                         <br></br>
 
@@ -291,7 +414,8 @@ export default function List({items}) {
                                             flavour={result.flavour}
                                             category={result.category}
                                             rating={result.rating}
-                                            rank={(currentPage - 1) * recordsPerPage + index + 4}
+                                            rank={(currentPage - 1) * recordsPerPage + index + 1}
+                                            retailer={retailerLogos[result.retailer]}
                                         />
                                     </div>
                                 </div>

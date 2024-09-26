@@ -1,7 +1,7 @@
 import React from 'react';
 import './Cardv2.css';
 
-export default function Cardv2({ providername, weight, price, value, logo, link, flavour, category, rating, rank }) {
+export default function Cardv2({ providername, weight, price, value, logo, link, flavour, category, rating, rank, retailer }) {
     let rating_parsed = undefined;
     if (rating !== undefined) {
         rating_parsed = rating.toFixed(1);
@@ -65,6 +65,7 @@ export default function Cardv2({ providername, weight, price, value, logo, link,
                             <br></br>
                             <br></br>
                         
+                            {/* <div>{retailer}</div> */}
                             <div className="bubbles leading-none">
                                 <div className="bubbleflav">{flavour}</div>
                                 <div className="bubbletype">{category}</div>

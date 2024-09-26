@@ -28,9 +28,31 @@
 }
   
 .courier {
-
   font-family: 'Courier New', Courier, monospace; /* Set font to Courier New */
   font-weight: bold; 
 }
 
-  
+
+.heading-container {
+  text-align: center;
+  /* margin: 20px 0; */
+  margin-top: 10px;
+  /* margin-bottom: -3rem; */
+}
+
+.heading {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #1D4ED8;
+
+  /* padding: 10px 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+}
+
+.white-separator {
+  border: 0;
+  height: 2px;
+  margin: 20px 0;
+  background-color: white;
+}
