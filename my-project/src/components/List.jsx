@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 // import Breadcrumb from './Breadcrumb';
 // import ResultRow from './ResultRow';
 import axios from "axios";
@@ -27,7 +27,35 @@ export default function List({items, selectedItems, setSelectedItems}) {
     const [loading, setLoading] = useState(true);
     const [empty, setEmpty] = useState(false);
     const [selectedOption1, setSelectedOption1] = useState('Sort By');
-  
+    const carouselRef = useRef(null);
+    const [showLeftArrow, setShowLeftArrow] = useState(false);
+    const [showRightArrow, setShowRightArrow] = useState(true);
+
+    const scrollLeft = () => {
+        carouselRef.current.scrollBy({ left: -300, behavior: 'smooth' });
+    };
+
+    const scrollRight = () => {
+        carouselRef.current.scrollBy({ left: 300, behavior: 'smooth' });
+    };
+
+    const handleScroll = () => {
+        const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
+        setShowLeftArrow(scrollLeft > 0);
+        setShowRightArrow(scrollLeft < scrollWidth - clientWidth);
+    };
+
+    useEffect(() => {
+        const carousel = carouselRef.current;
+        if (carousel) {
+            carousel.addEventListener('scroll', handleScroll);
+            handleScroll(); // Initial check
+
+            return () => {
+                carousel.removeEventListener('scroll', handleScroll);
+            };
+        }
+    }, []);
 
     const handleSelect1 = (option) => {
         setSelectedOption1(option);
@@ -257,32 +285,36 @@ export default function List({items, selectedItems, setSelectedItems}) {
                                 &#x1F4B5; Best Value {title[0]} {title[1]} Protein
                             </h2>
                         </div>
-                        
-                        <div className="card-container">
-                            {valueFiltered.slice(0, 3).map((result, index) => (
-                                <div key={result._id} className="relative flex items-center space-x-4">
 
-                                    <div className="card-item flex-1">
-                                        <Cardv2
-                                            providername={result.title}
-                                            weight={result.weight}
-                                            price={result.currentPrice}
-                                            value={result.value}
-                                            logo={result.image}
-                                            link={result.url}
-                                            flavour={result.flavour}
-                                            category={result.category}
-                                            rating={result.rating}
-                                            rank={index + 1}
-                                            retailer={retailerLogos[result.retailer]}
-                                            selectedItems={selectedItems}
-                                            setSelectedItems={setSelectedItems}
-                                            uniqueId={`card-${result._id}`}
-                                            id={result._id}
-                                        />
+                        
+                        <div className="carousel-wrapper">
+                            {showLeftArrow && <button className="carousel-arrow left-arrow" onClick={scrollLeft}>&#9664;</button>}
+                            <div className="carousel-container" ref={carouselRef} onScroll={handleScroll}>
+                                {valueFiltered.slice(0, 10).map((result, index) => (
+                                    <div key={result._id} className="">
+                                        <div className="card-item">
+                                            <Cardv2
+                                                providername={result.title}
+                                                weight={result.weight}
+                                                price={result.currentPrice}
+                                                value={result.value}
+                                                logo={result.image}
+                                                link={result.url}
+                                                flavour={result.flavour}
+                                                category={result.category}
+                                                rating={result.rating}
+                                                rank={index + 1}
+                                                retailer={retailerLogos[result.retailer]}
+                                                selectedItems={selectedItems}
+                                                setSelectedItems={setSelectedItems}
+                                                uniqueId={`card-${result._id}`}
+                                                id={result._id}
+                                            />
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
+                                ))}
+                            </div>
+                            {showRightArrow && <button className="carousel-arrow right-arrow" onClick={scrollRight}>&#9654;</button>}
                         </div>
 
                         <div className="heading-container">

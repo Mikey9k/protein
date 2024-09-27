@@ -13,6 +13,8 @@
   flex: 1 1 300px; /* Flex-grow, flex-shrink, and flex-basis */
   max-width: 300px;
   box-sizing: border-box;
+  display: inline-block;
+  /* margin-right: 10px; */
 }
 
 @media (max-width: 768px) {
@@ -36,7 +38,7 @@
 .heading-container {
   text-align: center;
   /* margin: 20px 0; */
-  margin-top: 10px;
+  margin-top: 20px;
   /* margin-bottom: -3rem; */
 }
 
@@ -55,4 +57,64 @@
   height: 2px;
   margin: 20px 0;
   background-color: white;
+}
+
+.carousel-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.carousel-container {
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden; /* Prevent vertical scrolling */
+  scroll-snap-type: x mandatory;
+  gap: 10px;
+  padding: 10px;
+  height: auto; /* Ensure the container height adjusts to the tallest card */
+  scroll-behavior: smooth;
+}
+
+.card-container {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  width: 80%; /* Adjust width for cards */
+}
+
+.card-item {
+  width: 100%;
+}
+
+.carousel-container::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for a cleaner look */
+}
+
+.carousel-container {
+  -ms-overflow-style: none;  /* Hide scrollbar for IE and Edge */
+  scrollbar-width: none;  /* Hide scrollbar for Firefox */
+}
+
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.left-arrow {
+  left: 0;
+}
+
+.right-arrow {
+  right: 0;
+}
+
+.carousel-arrow:disabled {
+  display: none;
 }
