@@ -1,7 +1,7 @@
 .nft{
     user-select:none;
-    max-width: 300px;
-    margin: 5rem auto;
+    max-width: 250px;
+    margin: 3rem auto;
     /* border: 1px solid #ffffff22; */
     background-color: #282c34;
     /* background: linear-gradient(0deg, rgba(40,44,52,1) 0%, rgba(17,0,32,.5) 100%); */
@@ -28,9 +28,9 @@
 }
 
 .bubbles {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
+    /* position: absolute; */
+    /* bottom: 10px;
+    left: 10px; */
     display: flex;
     gap: 10px;
 }
@@ -52,12 +52,21 @@
   
 .image-container {
     width: 100%;
-    height: 100%; /* Adjust the height as needed */
+    height: 250px; /* Fixed height for the image container */
     overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-container img {
+    width: 100%; /* Fixed width */
+    height: 100%; /* Fixed height */
+    object-fit: contain; /* Ensure the image covers the container while maintaining aspect ratio */
 }
 
 .content-overlap {
-    margin-top: -20px; /* Adjust the value as needed to overlap the image */
+    /* margin-top: -20px;  */
     z-index: 1;
     position: relative;
 }
@@ -65,4 +74,17 @@
 .zoom-out {
     transform: scale(0.8); /* Adjust the scale value as needed */
     transition: transform 0.3s ease;
+}
+
+.fixed-height {
+    height: 30px; /* Fixed height for the h6 element */
+    overflow: hidden;
+}
+
+.separator2 {
+    border: 0;
+    height: 2px;
+    background: linear-gradient(to right, rgba(255, 0, 150, 1), rgba(255, 200, 0, 1));
+    margin: 20px 0;
+    width: 100%; /* Ensure the separator goes across the whole card */
 }

@@ -20,7 +20,7 @@ const retailerLogos = {
     // Add more retailer names and their logos as needed
 };
 
-export default function List({items}) {
+export default function List({items, selectedItems, setSelectedItems}) {
     const [latest, setLatest] = useState("");
     const [cachedResults,setCachedResults] = useState([]);
     const [filteredResults, setFilteredResults] = useState([]);
@@ -46,12 +46,12 @@ export default function List({items}) {
     }
 
     const title = [...items];
-    console.log(title);
+    // console.log(title);
 
     if (title.length === 0) {
         //
     } else {
-        console.log("mumma")
+        // console.log("mumma")
         if (title[0] === "Pick A Flavour") {
             title[0] = "";
             title[1] = category[title[1]];
@@ -275,6 +275,10 @@ export default function List({items}) {
                                             rating={result.rating}
                                             rank={index + 1}
                                             retailer={retailerLogos[result.retailer]}
+                                            selectedItems={selectedItems}
+                                            setSelectedItems={setSelectedItems}
+                                            uniqueId={`card-${result._id}`}
+                                            id={result._id}
                                         />
                                     </div>
                                 </div>
@@ -304,6 +308,10 @@ export default function List({items}) {
                                             rating={result.rating}
                                             rank={index + 1}
                                             retailer={retailerLogos[result.retailer]}
+                                            selectedItems={selectedItems}
+                                            setSelectedItems={setSelectedItems}
+                                            uniqueId={`card-${result._id}`}
+                                            id={result._id}
                                         />
                                     </div>
                                 </div>
@@ -416,6 +424,10 @@ export default function List({items}) {
                                             rating={result.rating}
                                             rank={(currentPage - 1) * recordsPerPage + index + 1}
                                             retailer={retailerLogos[result.retailer]}
+                                            selectedItems={selectedItems}
+                                            setSelectedItems={setSelectedItems}
+                                            uniqueId={`card-${result._id}`}
+                                            id={result._id}
                                         />
                                     </div>
                                 </div>

@@ -1,0 +1,73 @@
+.compare-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f8f9fa;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center; /* Center the items */
+    padding: 0.5rem;
+    z-index: 1000;
+}
+
+.compare-item, .empty-slot {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    padding: 5px; /* Reduced padding */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    width: 100%;
+    max-width: 120px; /* Reduced max-width */
+    margin: 0 10px; /* Reduced margin between items */
+    position: relative; /* Added for positioning the button */
+}
+
+.compare-item {
+    border: 2px solid orange; /* Added orange border */
+}
+
+.compare-logo {
+    width: 60px; /* Reduced width */
+    height: 60px; /* Reduced height */
+    object-fit: contain;
+    border-radius: 8px;
+    margin-right: 5px; /* Reduced margin */
+    margin-left: 5px;
+}
+
+.empty-slot {
+    justify-content: center;
+    background-color: #e9ecef;
+    font-weight: bold;
+    border: 2px dashed #999; /* Thinner and nicer looking dotted border */
+}
+
+.empty-slot-text {
+    color: #515151;
+}
+
+.remove-button {
+    position: absolute;
+    top: 50%;
+    right: 8px; /* Moved slightly to the right */
+    transform: translateY(-50%);
+    background-color: #ff6b6b;
+    border: none;
+    border-radius: 50%;
+    color: white;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 16px; /* Adjusted font size */
+    line-height: 1; /* Adjusted line height */
+}
+
+.remove-button:hover {
+    background-color: #ff4c4c;
+}
