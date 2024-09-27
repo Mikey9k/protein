@@ -32,6 +32,9 @@ export default function CompareBar({ selectedItems, onRemoveItem }) {
                     )}
                 </div>
             ))}
+            <button className="compare-button">
+                Compare
+            </button>
         </div>
     );
 }

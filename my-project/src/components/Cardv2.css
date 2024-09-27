@@ -77,7 +77,7 @@
 }
 
 .fixed-height {
-    height: 30px; /* Fixed height for the h6 element */
+    height: 32px; /* Fixed height for the h6 element */
     overflow: hidden;
 }
 
@@ -87,4 +87,10 @@
     background: linear-gradient(to right, rgba(255, 0, 150, 1), rgba(255, 200, 0, 1));
     margin: 20px 0;
     width: 100%; /* Ensure the separator goes across the whole card */
+}
+
+.nowrap {
+    white-space: nowrap;
+    /* overflow: hidden; */
+    text-overflow: ellipsis;
 }

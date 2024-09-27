@@ -78,7 +78,7 @@ export default function Cardv2({ providername, weight, price, value, logo, link,
                         <h5 className="text-gray text-3xl font-bold leading-none">
                             ${price.toFixed(2)}
                         </h5>
-                        <span className="text-xs text-gray-450 leading-none font-light flex items-center mt-1">
+                        <span className="text-xs text-gray-450 leading-none font-light flex items-center mt-1 nowrap">
                             ${value.toFixed(2)} per 100g | {weight} grams | 
                             {rating_parsed !== undefined && (
                                 <div className="flex items-center ml-1">
@@ -102,6 +102,17 @@ export default function Cardv2({ providername, weight, price, value, logo, link,
                         </div>
 
                         <hr className="separator" />
+
+                        <div className="mt-2 flex flex-wrap gap-3 justify-end">
+                            {retailer && (
+                                <a href={link} target="_blank" rel="noopener noreferrer">
+                                <div className="sitebubble flex items-center gap-1">
+                                    <img src={retailer} alt={retailer} className="w-20" />
+                                    <img src="https://cdn3.iconfinder.com/data/icons/iconano-web-stuff/512/109-External-512.png" className="h-3" />
+                                </div>
+                                </a>
+                            )}
+                        </div>
 
                         <div className="flex justify-end mt-2">
                             <div className="flex items-center">
