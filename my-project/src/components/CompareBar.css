@@ -20,8 +20,8 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s;
     width: 100%;
-    max-width: 120px; /* Reduced max-width */
-    margin: 0 10px; /* Reduced margin between items */
+    max-width: 110px; /* Reduced max-width */
+    margin: 0 5px; /* Reduced margin between items */
     position: relative; /* Added for positioning the button */
 }
 
@@ -50,10 +50,6 @@
 }
 
 .remove-button {
-    position: absolute;
-    top: 50%;
-    right: 8px; /* Moved slightly to the right */
-    transform: translateY(-50%);
     background-color: #ff6b6b;
     border: none;
     border-radius: 50%;
@@ -76,10 +72,10 @@
     background-color: #1D4ED8;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 10px;
     cursor: pointer;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold;
     height: 50%;
     margin-top: 1rem;
