@@ -1,13 +1,28 @@
 // protein/my-project/src/components/CompareBar.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './CompareBar.css';
 import CompareModal from './CompareModal';
 
 export default function CompareBar({ selectedItems, onRemoveItem }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [maxItems, setMaxItems] = useState(getMaxItems());
+
+    useEffect(() => {
+        const handleResize = () => {
+            setMaxItems(getMaxItems());
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
+    function getMaxItems() {
+        return window.innerWidth <= 600 ? 2 : 4;
+    }
 
     if (selectedItems.length === 0) return null;
-    const maxItems = 3;
     const emptySlots = maxItems - selectedItems.length;
 
     return (
