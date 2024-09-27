@@ -1,7 +1,11 @@
-import React from 'react';
+// protein/my-project/src/components/CompareBar.jsx
+import React, { useState } from 'react';
 import './CompareBar.css';
+import CompareModal from './CompareModal';
 
 export default function CompareBar({ selectedItems, onRemoveItem }) {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
     if (selectedItems.length === 0) return null;
     const maxItems = 3;
     const emptySlots = maxItems - selectedItems.length;
@@ -32,9 +36,10 @@ export default function CompareBar({ selectedItems, onRemoveItem }) {
                     )}
                 </div>
             ))}
-            <button className="compare-button">
+            <button className="compare-button" onClick={() => setIsModalOpen(true)}>
                 Compare
             </button>
+            {isModalOpen && <CompareModal selectedItems={selectedItems} onClose={() => setIsModalOpen(false)} />}
         </div>
     );
 }

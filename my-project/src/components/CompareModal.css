@@ -1,0 +1,67 @@
+/* protein/my-project/src/components/CompareModal.css */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 40px 20px 20px 20px; /* Added padding to the top */
+    border-radius: 10px;
+    position: relative;
+    width: 80%;
+    max-width: 900px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.close-button {
+    position: absolute;
+    top: 10px; /* Adjusted position */
+    right: 10px; /* Adjusted position */
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
+}
+
+.compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: 'Arial', sans-serif;
+}
+
+.compare-table th, .compare-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+    font-size: 14px;
+}
+
+.compare-table th {
+    background-color: #f8f8f8;
+    font-weight: bold;
+}
+
+.compare-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.compare-table tr:hover {
+    background-color: #f1f1f1;
+}
