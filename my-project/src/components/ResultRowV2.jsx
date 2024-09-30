@@ -38,7 +38,7 @@ const ResultRowV2 = ({ providername, weight, price, value, logo, link, flavour, 
         setSelectedItems([...selectedItems, { providername, weight, price, rating_parsed, id, logo, checked: true }]);
       } else {
         e.target.checked = false;
-        alert(`You can only compare up to ${maxItems} items or the item is already selected.`);
+        alert(`You can only compare up to ${maxItems} items.`);
       }
     } else {
       setSelectedItems(selectedItems.filter(item => item.id !== id));
@@ -47,7 +47,7 @@ const ResultRowV2 = ({ providername, weight, price, value, logo, link, flavour, 
   }
 
   return (
-    <tr className="result-row-v2">
+    <tr className="result-row-v2 bubble-row">
       <td>{rating_parsed}</td>
       <td>
         {providername && (
