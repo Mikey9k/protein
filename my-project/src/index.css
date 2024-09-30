@@ -11,11 +11,9 @@ body,
 body {
     /* background-color: #113; */
     /* color: #ffff; */
-    background: linear-gradient(to right, #ff7e5f, #feb47b);  
+    background: linear-gradient(to right, #add8e6, #b0e0e6);  
     /* background: linear-gradient(to right, #5d5d5d, #9c9c9c);   */
 
 
     /* height:100vh; */
-  }
-
-  
+}
