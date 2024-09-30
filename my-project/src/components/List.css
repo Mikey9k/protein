@@ -118,3 +118,30 @@
 .carousel-arrow:disabled {
   display: none;
 }
+
+.result-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.result-table th, .result-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.result-table th {
+  background-color: #f2f2f2;
+  cursor: pointer;
+}
+
+.result-table th:hover {
+  background-color: #ddd;
+}
+
+.result-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.result-table tr:hover {
+  background-color: #ddd;
+}

@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
+import React from 'react';
 // import Breadcrumb from './Breadcrumb';
 // import ResultRow from './ResultRow';
 import axios from "axios";
-import _, { sortBy } from 'lodash';
+import _, { result, sortBy } from 'lodash';
 // import { data } from 'autoprefixer';
 // import LoadingSkeleton from './LoadingSkeleton';
 import { format, toZonedTime } from 'date-fns-tz';
@@ -13,6 +14,7 @@ import './List.css';
 import CardTemplate from './CardTemplate';
 import { GiPassport } from 'react-icons/gi';
 import './SortedBar.css';
+import ResultRowV2 from './ResultRowV2';
 
 // Create a mapping object for retailer names and their logos
 const retailerLogos = {
@@ -27,35 +29,60 @@ export default function List({items, selectedItems, setSelectedItems}) {
     const [loading, setLoading] = useState(true);
     const [empty, setEmpty] = useState(false);
     const [selectedOption1, setSelectedOption1] = useState('Sort By');
-    const carouselRef = useRef(null);
-    const [showLeftArrow, setShowLeftArrow] = useState(false);
-    const [showRightArrow, setShowRightArrow] = useState(true);
 
-    const scrollLeft = () => {
-        carouselRef.current.scrollBy({ left: -300, behavior: 'smooth' });
-    };
+    const [sortConfig, setSortConfig] = useState({ key: 'providername', direction: 'ascending' });
 
-    const scrollRight = () => {
-        carouselRef.current.scrollBy({ left: 300, behavior: 'smooth' });
-    };
-
-    const handleScroll = () => {
-        const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
-        setShowLeftArrow(scrollLeft > 0);
-        setShowRightArrow(scrollLeft < scrollWidth - clientWidth);
-    };
-
-    useEffect(() => {
-        const carousel = carouselRef.current;
-        if (carousel) {
-            carousel.addEventListener('scroll', handleScroll);
-            handleScroll(); // Initial check
-
-            return () => {
-                carousel.removeEventListener('scroll', handleScroll);
-            };
+    const sortedItems = React.useMemo(() => {
+      const sortableItems = [...items];
+      sortableItems.sort((a, b) => {
+        if (a[sortConfig.key] < b[sortConfig.key]) {
+          return sortConfig.direction === 'ascending' ? -1 : 1;
         }
-    }, []);
+        if (a[sortConfig.key] > b[sortConfig.key]) {
+          return sortConfig.direction === 'ascending' ? 1 : -1;
+        }
+        return 0;
+      });
+      return sortableItems;
+    }, [items, sortConfig]);
+  
+    const requestSort = key => {
+      let direction = 'ascending';
+      if (sortConfig.key === key && sortConfig.direction === 'ascending') {
+        direction = 'descending';
+      }
+      setSortConfig({ key, direction });
+    };
+
+    // const carouselRef = useRef(null);
+    // const [showLeftArrow, setShowLeftArrow] = useState(false);
+    // const [showRightArrow, setShowRightArrow] = useState(true);
+
+    // const scrollLeft = () => {
+    //     carouselRef.current.scrollBy({ left: -300, behavior: 'smooth' });
+    // };
+
+    // const scrollRight = () => {
+    //     carouselRef.current.scrollBy({ left: 300, behavior: 'smooth' });
+    // };
+
+    // const handleScroll = () => {
+    //     const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
+    //     setShowLeftArrow(scrollLeft > 0);
+    //     setShowRightArrow(scrollLeft < scrollWidth - clientWidth);
+    // };
+
+    // useEffect(() => {
+    //     const carousel = carouselRef.current;
+    //     if (carousel) {
+    //         carousel.addEventListener('scroll', handleScroll);
+    //         handleScroll(); // Initial check
+
+    //         return () => {
+    //             carousel.removeEventListener('scroll', handleScroll);
+    //         };
+    //     }
+    // }, []);
 
     const handleSelect1 = (option) => {
         setSelectedOption1(option);
@@ -280,7 +307,7 @@ export default function List({items, selectedItems, setSelectedItems}) {
                 {!loading && (
                     <div>
 
-                        <div className="heading-container">
+                        {/* <div className="heading-container">
                             <h2 className="heading">
                                 &#x1F4B5; Best Value {title[0]} {title[1]} Protein
                             </h2>
@@ -348,7 +375,7 @@ export default function List({items, selectedItems, setSelectedItems}) {
                                     </div>
                                 </div>
                             ))}
-                        </div>
+                        </div> */}
 
 
                         {/* <div className="courier flex justify-center mt-4 space-x-2">
@@ -440,6 +467,44 @@ export default function List({items, selectedItems, setSelectedItems}) {
 
                         <br></br>
 
+                        <table className="result-table">
+                            <thead>
+                                <tr>
+                                <th onClick={() => requestSort('rating')}>Rating</th>
+                                <th onClick={() => requestSort('logo')}>Logo</th>
+                                <th onClick={() => requestSort('providername')}>Provider Name</th>
+                                <th onClick={() => requestSort('value')}>Value</th>
+                                <th onClick={() => requestSort('weight')}>Weight</th>
+                                <th onClick={() => requestSort('price')}>Price</th>
+                                <th onClick={() => requestSort('flavour')}>Flavour</th>
+                                <th onClick={() => requestSort('category')}>Category</th>
+                                <th>Compare</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {currentRecords.map((result, index) => (
+                                <ResultRowV2
+                                    key={result._id}
+                                    providername={result.title}
+                                    weight={result.weight}
+                                    price={result.currentPrice}
+                                    value={result.value}
+                                    logo={result.image}
+                                    link={result.url}
+                                    flavour={result.flavour}
+                                    category={result.category}
+                                    rating={result.rating}
+                                    rank={(currentPage - 1) * recordsPerPage + index + 1}
+                                    retailer={retailerLogos[result.retailer]}
+                                    selectedItems={selectedItems}
+                                    setSelectedItems={setSelectedItems}
+                                    uniqueId={`card-${result._id}`}
+                                    id={result._id}
+                                />
+                                ))}
+                            </tbody>
+                        </table>
+{/* 
                         <div>
                             {currentRecords.map((result, index) => (
                                 <div key={result._id} className="flex items-center space-x-4 max-w-full">
@@ -465,26 +530,7 @@ export default function List({items, selectedItems, setSelectedItems}) {
                                 </div>
                             ))}
 
-
-                            {/* <div className="flex justify-center mt-4 space-x-2">
-                                {currentPage > 1 && (
-                                    <button
-                                        onClick={handlePreviousPage}
-                                        className="px-4 py-2 bg-blue-500 text-white hover:bg-blue-600"
-                                    >
-                                        Previous
-                                    </button>
-                                )}
-                                {currentPage < totalPages && (
-                                    <button
-                                        onClick={handleNextPage}
-                                        className="px-4 py-2 bg-blue-500 text-white hover:bg-blue-600"
-                                    >
-                                        Next
-                                    </button>
-                                )}
-                            </div> */}
-                        </div>
+                        </div> */}
                     </div>
                 )}
 
