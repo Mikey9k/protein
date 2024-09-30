@@ -29,30 +29,18 @@ export default function List({items, selectedItems, setSelectedItems}) {
     const [loading, setLoading] = useState(true);
     const [empty, setEmpty] = useState(false);
     const [selectedOption1, setSelectedOption1] = useState('Sort By');
+    const [sortedFiltered, setSortedFiltered] = useState([]);
 
-    const [sortConfig, setSortConfig] = useState({ key: 'providername', direction: 'ascending' });
+    const [sortConfig, setSortConfig] = useState({ key: 'rating', direction: 'ascending' });
 
-    const sortedItems = React.useMemo(() => {
-      const sortableItems = [...items];
-      sortableItems.sort((a, b) => {
-        if (a[sortConfig.key] < b[sortConfig.key]) {
-          return sortConfig.direction === 'ascending' ? -1 : 1;
-        }
-        if (a[sortConfig.key] > b[sortConfig.key]) {
-          return sortConfig.direction === 'ascending' ? 1 : -1;
-        }
-        return 0;
-      });
-      return sortableItems;
-    }, [items, sortConfig]);
-  
-    const requestSort = key => {
-      let direction = 'ascending';
-      if (sortConfig.key === key && sortConfig.direction === 'ascending') {
-        direction = 'descending';
-      }
-      setSortConfig({ key, direction });
+    const [recordsDisplayed, setRecordsDisplayed] = useState(10);
+
+    const loadMoreRecords = () => {
+        setRecordsDisplayed(recordsDisplayed + 10);
     };
+
+    const currentRecords = sortedFiltered.slice(0, recordsDisplayed);
+
 
     // const carouselRef = useRef(null);
     // const [showLeftArrow, setShowLeftArrow] = useState(false);
@@ -167,7 +155,7 @@ export default function List({items, selectedItems, setSelectedItems}) {
           .then(res => {
 
             setLatest(res.data.updatedAt);
-            // console.log(res.data.updatedAt);
+            console.log(res.data);
           });
     }, []);
     
@@ -187,60 +175,63 @@ export default function List({items, selectedItems, setSelectedItems}) {
 
     // const sortedCache = sortBy(cachedResults, "value").reverse();
     // console.log(filteredResults)
-    let sortedFiltered = [];
-    if (filteredResults !== "No records found") {
+    // useEffect(() => {
+    //     let sortedData = [];
+    //     if (filteredResults !== "No records found") {
+    //       if (selectedOption1 === 'Lowest Unit Price') {
+    //         sortedData = sortBy(filteredResults, "value");
+    //       } else if (selectedOption1 === 'Price (Low to high)') {
+    //         sortedData = sortBy(filteredResults, "currentPrice");
+    //       } else if (selectedOption1 === 'Price (High to low)') {
+    //         sortedData = sortBy(filteredResults, "currentPrice").reverse();
+    //       } else {
+    //         sortedData = sortBy(filteredResults, "weight").reverse();
+    //       }
+    //     }
+    //     setSortedFiltered(sortedData);
+    //   }, [filteredResults, selectedOption1]);
 
-        if (selectedOption1 === 'Lowest Unit Price') {
-            sortedFiltered = sortBy(filteredResults, "value");
-        } else if (selectedOption1 === 'Price (Low to high)') { 
-            sortedFiltered = sortBy(filteredResults, "currentPrice");
-        } else if (selectedOption1 === 'Price (High to low)') {
-            sortedFiltered = sortBy(filteredResults, "currentPrice").reverse();
-        } else {
-            sortedFiltered = sortBy(filteredResults, "weight").reverse();
 
+    const requestSort = (key) => {
+        let direction = 'ascending';
+        if (sortConfig.key === key && sortConfig.direction === 'ascending') {
+            direction = 'descending';
         }
-
-    } else {
-        // setEmpty(true);
-    }
-
-    let valueFiltered = sortBy(filteredResults, "value");
-    let reviewFiltered = sortBy(filteredResults, "reviews");
-
-    const [currentPage, setCurrentPage] = useState(1);
-    const recordsPerPage = 12;
-
-    const totalPages = Math.ceil(sortedFiltered.length / recordsPerPage);
-
-    const handleNextPage = () => {
-        if (currentPage < totalPages) {
-            setCurrentPage(currentPage + 1);
-        }
+        setSortConfig({ key, direction });
     };
 
-    const handlePreviousPage = () => {
-        if (currentPage > 1) {
-            setCurrentPage(currentPage - 1);
+    const getArrow = (key) => {
+        if (sortConfig.key === key) {
+            return (
+                <div className="arrow-container">
+                    <span className={sortConfig.direction === 'ascending' ? 'arrow active' : 'arrow'}>▲</span>
+                    <span className={sortConfig.direction === 'descending' ? 'arrow active' : 'arrow'}>▼</span>
+                </div>
+            );
         }
+        return (
+            <div className="arrow-container">
+                <span className="arrow">▲</span>
+                <span className="arrow">▼</span>
+            </div>
+        );
     };
 
-    const handlePageClick = (pageNumber) => {
-        setCurrentPage(pageNumber);
-    };
+    useEffect(() => {
+        let sortableRecords = [...filteredResults];
+        sortableRecords.sort((a, b) => {
+            if (a[sortConfig.key] < b[sortConfig.key]) {
+                return sortConfig.direction === 'ascending' ? -1 : 1;
+            }
+            if (a[sortConfig.key] > b[sortConfig.key]) {
+                return sortConfig.direction === 'ascending' ? 1 : -1;
+            }
+            return 0;
+        });
+    
+        setSortedFiltered(sortableRecords);
+    }, [filteredResults, sortConfig]);
 
-    const currentRecords = sortedFiltered.slice(
-        (currentPage - 1) * recordsPerPage,
-        currentPage * recordsPerPage
-    );
-
-    const getPageNumbers = () => {
-        const pages = [];
-        for (let i = Math.max(1, currentPage - 1); i <= Math.min(totalPages, currentPage + 1); i++) {
-            pages.push(i);
-        }
-        return pages;
-    };
 
     return (
         <div>
@@ -307,110 +298,6 @@ export default function List({items, selectedItems, setSelectedItems}) {
                 {!loading && (
                     <div>
 
-                        {/* <div className="heading-container">
-                            <h2 className="heading">
-                                &#x1F4B5; Best Value {title[0]} {title[1]} Protein
-                            </h2>
-                        </div>
-
-                        
-                        <div className="carousel-wrapper">
-                            {showLeftArrow && <button className="carousel-arrow left-arrow" onClick={scrollLeft}>&#9664;</button>}
-                            <div className="carousel-container" ref={carouselRef} onScroll={handleScroll}>
-                                {valueFiltered.slice(0, 10).map((result, index) => (
-                                    <div key={result._id} className="">
-                                        <div className="card-item">
-                                            <Cardv2
-                                                providername={result.title}
-                                                weight={result.weight}
-                                                price={result.currentPrice}
-                                                value={result.value}
-                                                logo={result.image}
-                                                link={result.url}
-                                                flavour={result.flavour}
-                                                category={result.category}
-                                                rating={result.rating}
-                                                rank={index + 1}
-                                                retailer={retailerLogos[result.retailer]}
-                                                selectedItems={selectedItems}
-                                                setSelectedItems={setSelectedItems}
-                                                uniqueId={`card-${result._id}`}
-                                                id={result._id}
-                                            />
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                            {showRightArrow && <button className="carousel-arrow right-arrow" onClick={scrollRight}>&#9654;</button>}
-                        </div>
-
-                        <div className="heading-container">
-                            <h2 className="heading">
-                                &#x1F4AA; Best Rated {title[0]} {title[1]} Protein
-                            </h2>
-                        </div>
-
-                        <div className="card-container">
-                            {reviewFiltered.slice(0, 3).map((result, index) => (
-                                <div key={result._id} className="relative flex items-center space-x-4">
-
-                                    <div className="card-item flex-1">
-                                        <Cardv2
-                                            providername={result.title}
-                                            weight={result.weight}
-                                            price={result.currentPrice}
-                                            value={result.value}
-                                            logo={result.image}
-                                            link={result.url}
-                                            flavour={result.flavour}
-                                            category={result.category}
-                                            rating={result.rating}
-                                            rank={index + 1}
-                                            retailer={retailerLogos[result.retailer]}
-                                            selectedItems={selectedItems}
-                                            setSelectedItems={setSelectedItems}
-                                            uniqueId={`card-${result._id}`}
-                                            id={result._id}
-                                        />
-                                    </div>
-                                </div>
-                            ))}
-                        </div> */}
-
-
-                        {/* <div className="courier flex justify-center mt-4 space-x-2">
-                            {currentPage > 1 && (
-                                <button
-                                    onClick={handlePreviousPage}
-                                    className="px-4 py-2 bg-white text-[#0082cd] shadow-md hover:shadow-2xl transition-shadow duration-300"
-                                    style={{ zIndex: 10 }}
-                                >
-                                    Previous
-                                </button>
-                            )}
-                            {getPageNumbers().map((pageNumber) => (
-                                <button
-                                    key={pageNumber}
-                                    onClick={() => handlePageClick(pageNumber)}
-                                    className={`px-4 py-2 ${pageNumber === currentPage ? 'bg-blue-700 text-white' : 'text-[#0082cd] bg-white shadow-md hover:shadow-2xl transition-shadow duration-300'}`}
-                                    style={{ zIndex: 10 }}
-                                >
-                                    {pageNumber}
-                                </button>
-                            ))}
-                            {currentPage < totalPages && (
-                                <button
-                                    onClick={handleNextPage}
-                                    className="px-4 py-2 bg-white text-[#0082cd] shadow-md hover:shadow-2xl transition-shadow duration-300"
-                                    style={{ zIndex: 10 }}
-                                >
-                                    Next
-                                </button>
-                            )}
-                        </div> */}
-
-                        <br></br>
-                        {/* <hr className="white-separator" /> */}
 
                         <div className="heading-container">
                             <h2 className="heading">
@@ -418,67 +305,55 @@ export default function List({items, selectedItems, setSelectedItems}) {
                             </h2>
                         </div>
 
-                        <br></br>
                         
-                        <div className='flex flex-col items-center'>
-                            <div className="flex justify-center items-center w-full space-x-4">
-                                <div className="filter-bar">
-                                <div className="dropdown-container">
-                                    <div className="dropdown-display">{selectedOption1}</div>
-                                    <div className="dropdown-menu">
-                                    <div className="dropdown-item" onClick={() => handleSelect1('Lowest Unit Price')}>Lowest Unit Price</div>
-                                    <div className="dropdown-item" onClick={() => handleSelect1('Price (Low to high)')}>Price (Low to high)</div>
-                                    <div className="dropdown-item" onClick={() => handleSelect1('Price (High to low)')}>Price (High to low)</div>
-                                    </div>
-                                </div>
-                                </div>
-                                <div className="courier flex justify-center space-x-2">
-                                {currentPage > 1 && (
-                                    <button
-                                    onClick={handlePreviousPage}
-                                    className="px-4 py-2 bg-white text-[#0082cd] shadow-md hover:shadow-2xl transition-shadow duration-300"
-                                    style={{ zIndex: 10 }}
-                                    >
-                                    Previous
-                                    </button>
-                                )}
-                                {getPageNumbers().map((pageNumber) => (
-                                    <button
-                                    key={pageNumber}
-                                    onClick={() => handlePageClick(pageNumber)}
-                                    className={`px-4 py-2 ${pageNumber === currentPage ? 'bg-blue-700 text-white' : 'text-[#0082cd] bg-white shadow-md hover:shadow-2xl transition-shadow duration-300'}`}
-                                    style={{ zIndex: 10 }}
-                                    >
-                                    {pageNumber}
-                                    </button>
-                                ))}
-                                {currentPage < totalPages && (
-                                    <button
-                                    onClick={handleNextPage}
-                                    className="px-4 py-2 bg-white text-[#0082cd] shadow-md hover:shadow-2xl transition-shadow duration-300"
-                                    style={{ zIndex: 10 }}
-                                    >
-                                    Next
-                                    </button>
-                                )}
-                                </div>
-                            </div>
-                            </div>
+
 
                         <br></br>
 
                         <table className="result-table">
                             <thead>
                                 <tr>
-                                <th onClick={() => requestSort('rating')}>Rating</th>
-                                <th onClick={() => requestSort('logo')}>Logo</th>
-                                <th onClick={() => requestSort('providername')}>Provider Name</th>
-                                <th onClick={() => requestSort('value')}>Value</th>
-                                <th onClick={() => requestSort('weight')}>Weight</th>
-                                <th onClick={() => requestSort('price')}>Price</th>
-                                <th onClick={() => requestSort('flavour')}>Flavour</th>
-                                <th onClick={() => requestSort('category')}>Category</th>
-                                <th>Compare</th>
+                                    <th onClick={() => requestSort('rating')}>
+                                        <div className="header-container">
+                                            <span>Rating</span> {getArrow('rating')}
+                                        </div>
+                                    </th>
+                                    <th onClick={() => requestSort('logo')}>
+                                        <div className="header-container">
+                                            <span>Logo</span> {getArrow('logo')}
+                                        </div>
+                                    </th>
+                                    <th onClick={() => requestSort('providername')}>
+                                        <div className="header-container">
+                                            <span>Provider Name</span> {getArrow('providername')}
+                                        </div>
+                                    </th>
+                                    <th onClick={() => requestSort('value')}>
+                                        <div className="header-container">
+                                            <span>Value</span> {getArrow('value')}
+                                        </div>
+                                    </th>
+                                    <th onClick={() => requestSort('weight')}>
+                                        <div className="header-container">
+                                            <span>Weight</span> {getArrow('weight')}
+                                        </div>
+                                    </th>
+                                    <th onClick={() => requestSort('currentPrice')}>
+                                        <div className="header-container">
+                                            <span>Price</span> {getArrow('currentPrice')}
+                                        </div>
+                                    </th>
+                                    <th onClick={() => requestSort('flavour')}>
+                                        <div className="header-container">
+                                            <span>Flavour</span> {getArrow('flavour')}
+                                        </div>
+                                    </th>
+                                    <th onClick={() => requestSort('category')}>
+                                        <div className="header-container">
+                                            <span>Category</span> {getArrow('category')}
+                                        </div>
+                                    </th>
+                                    <th>Compare</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -494,7 +369,7 @@ export default function List({items, selectedItems, setSelectedItems}) {
                                     flavour={result.flavour}
                                     category={result.category}
                                     rating={result.rating}
-                                    rank={(currentPage - 1) * recordsPerPage + index + 1}
+                                    rank={index + 1}
                                     retailer={retailerLogos[result.retailer]}
                                     selectedItems={selectedItems}
                                     setSelectedItems={setSelectedItems}
@@ -504,33 +379,21 @@ export default function List({items, selectedItems, setSelectedItems}) {
                                 ))}
                             </tbody>
                         </table>
-{/* 
-                        <div>
-                            {currentRecords.map((result, index) => (
-                                <div key={result._id} className="flex items-center space-x-4 max-w-full">
-                                    <div className="flex-1 min-w-0">
-                                        <ResultRow
-                                            providername={result.title}
-                                            weight={result.weight}
-                                            price={result.currentPrice}
-                                            value={result.value}
-                                            logo={result.image}
-                                            link={result.url}
-                                            flavour={result.flavour}
-                                            category={result.category}
-                                            rating={result.rating}
-                                            rank={(currentPage - 1) * recordsPerPage + index + 1}
-                                            retailer={retailerLogos[result.retailer]}
-                                            selectedItems={selectedItems}
-                                            setSelectedItems={setSelectedItems}
-                                            uniqueId={`card-${result._id}`}
-                                            id={result._id}
-                                        />
-                                    </div>
-                                </div>
-                            ))}
 
-                        </div> */}
+                        <br></br>
+                        
+
+                        
+                        {recordsDisplayed < sortedFiltered.length && (
+                            <div className='flex flex-col items-center'>
+                                <button onClick={loadMoreRecords} className="load-more-button">
+                                    Load More
+                                </button>
+                            </div>
+                        )}
+
+
+
                     </div>
                 )}
 
