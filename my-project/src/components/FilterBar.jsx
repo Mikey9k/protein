@@ -22,7 +22,7 @@ export default function FilterBar({sendDataToParent}) {
     // };
 
     return (
-        <div className="filter-bar">
+        <div className="filter-bar" id="filter-bar">
             <div className="dropdown-container">
                 <div className="dropdown-display">{selectedOption1}</div>
                 <div className="dropdown-menu">

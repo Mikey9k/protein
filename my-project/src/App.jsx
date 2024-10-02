@@ -6,6 +6,7 @@ import FilterBar from './components/FilterBar'; // Import the FilterBar componen
 import Header from './components/Header';
 import List from './components/List';
 import CompareBar from './components/CompareBar';
+import LandingPage from './components/LandingPage';
 
 function App() {
   const [selectedItems, setSelectedItems] = useState([]);
@@ -33,8 +34,10 @@ function App() {
 
   return (
     <div>
-      <Header />
+      <LandingPage />
 
+      {/* <Header /> */}
+      <br id='here'></br>
       <div className='flex flex-col items-center'>
         <FilterBar sendDataToParent={handleDataFromChild}/>
       </div>

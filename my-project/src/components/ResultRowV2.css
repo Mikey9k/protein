@@ -18,8 +18,9 @@
     width: 100%;
     background-color: #f9f9f9;
     margin-bottom: 10px;
-    border: 1px solid #ddd;
+    border: 2px solid #0069e9;
     border-radius: 8px;
+    
 }
 
 .result-row-v2 .container-item {
@@ -49,4 +50,14 @@
 .container-item .text-content {
     display: flex;
     flex-direction: column;
+}
+
+.result-row-v2 .container-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    text-align: center;
+    border-right: 1px solid #eee;
+    overflow: auto; /* Ensures content doesn't overflow */
 }

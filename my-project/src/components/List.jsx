@@ -299,7 +299,7 @@ export default function List({items, selectedItems, setSelectedItems}) {
                     <div>
 
 
-                        <div className="heading-container">
+                        <div className="heading-container" id="heading-container">
                             <h2 className="heading">
                                 &#128269; Browse {title[0]} {title[1]} Protein
                             </h2>
@@ -310,12 +310,12 @@ export default function List({items, selectedItems, setSelectedItems}) {
 
                         <br></br>
 
-                        <div className="header-bar">
+                        <div className="header-bar" id="header-bar">
                             <div className="header-container" onClick={() => requestSort('rating')}>
                                 <span className="header-item">Rating</span> {getArrow('rating')}
                             </div>
-                            <div className="header-container" onClick={() => requestSort('providername')}>
-                                <span className="header-item">Provider Name</span> {getArrow('providername')}
+                            <div className="header-container" onClick={() => requestSort('title')}>
+                                <span className="header-item">Provider Name</span> {getArrow('title')}
                             </div>
                             <div className="header-container" onClick={() => requestSort('value')}>
                                 <span className="header-item">Value</span> {getArrow('value')}

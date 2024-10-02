@@ -1,0 +1,48 @@
+.landing-page {
+    margin: 0;
+    font-family: 'Lato', sans-serif;
+    background-color: #e0f7fa;
+    font-weight: bold;
+}
+
+.landing-page {
+    text-align: center;
+    padding: 20px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-section {
+    background: linear-gradient(135deg, #00bcd4, #009688);
+    color: white;
+    padding: 100px 20px;
+    border-radius: 10px;
+    margin-bottom: 40px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.landing-title {
+    font-size: 3em;
+    margin: 0;
+}
+
+.landing-subtitle {
+    font-size: 1.5em;
+    margin: 20px 0;
+}
+
+.landing-button {
+    background-color: #00796b;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1em;
+}

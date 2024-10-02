@@ -58,41 +58,47 @@ const ResultRowV2 = ({ providername, weight, price, value, logo, link, flavour, 
         )}
       </div> */}
         <div className="container-item">
-        <div className="content-wrapper">
-            {providername && (
-            <div className="image-container1">
-                <img src={logo} alt={providername} className="image-responsive object-contain zoom-out1" />
-            </div>
-            )}
-            <div className="text-content">
-                <div>{title}</div>
-                <div className="bubbles1">
-                    <div className="bubbleflav">{flavour}</div>
-                    <div className="bubbletype">{category}</div>
+            <div className="content-wrapper">
+                {providername && (
+                <div className="image-container1">
+                    <img src={logo} alt={providername} className="image-responsive object-contain zoom-out1" />
+                </div>
+                )}
+                <div className="text-content">
+                    <div>{title}</div>
+                    <div className="bubbles1">
+                        <div className="bubbleflav">{flavour}</div>
+                        <div className="bubbletype">{category}</div>
+                    </div>
                 </div>
             </div>
         </div>
-        </div>
         <div className="container-item">
-            <div>{value}</div>
-            <div style={{ fontSize: 'x-small' }}>per 100g</div>
+            <div className="text-content">
+                <div>{value}</div>
+                <div style={{ fontSize: 'x-small' }}>per 100g</div>
+            </div>
         </div>
         <div className="container-item">{weight}</div>
         <div className="container-item">${price.toFixed(2)}</div>
         <div className="container-item">{flavour}</div>
         <div className="container-item">{category}</div>
         <div className="container-item">
-            {retailer && (
-            <a href={link} target="_blank" rel="noopener noreferrer">
-                <div className="sitebubble flex items-center gap-1">
-                <img src={retailer} alt={retailer} className="w-20" />
-                <img src="https://cdn3.iconfinder.com/data/icons/iconano-web-stuff/512/109-External-512.png" className="h-3" />
+            <div className="text-content">
+
+                {retailer && (
+                <a href={link} target="_blank" rel="noopener noreferrer">
+                    <div className="sitebubble flex items-center gap-1">
+                    <img src={retailer} alt={retailer} className="w-20" />
+                    {/* <img src="https://cdn3.iconfinder.com/data/icons/iconano-web-stuff/512/109-External-512.png" className="h-3" /> */}
+                    </div>
+                </a>
+                )}
+                <br></br>
+                <div className="flex items-center">
+                    <input type="checkbox" checked={isChecked} id={`compare-${uniqueId}`} name={`compare-${uniqueId}`} className="mr-2" onChange={handleCompareChange} />
+                    <label htmlFor={`compare-${uniqueId}`} className="text-sm font-medium text-gray-700">Compare</label>
                 </div>
-            </a>
-            )}
-            <div className="flex items-center">
-            <input type="checkbox" checked={isChecked} id={`compare-${uniqueId}`} name={`compare-${uniqueId}`} className="mr-2" onChange={handleCompareChange} />
-            <label htmlFor={`compare-${uniqueId}`} className="text-sm font-medium text-gray-700">Compare</label>
             </div>
         </div>
     </div>
