@@ -15,6 +15,7 @@ import CardTemplate from './CardTemplate';
 import { GiPassport } from 'react-icons/gi';
 import './SortedBar.css';
 import ResultRowV2 from './ResultRowV2';
+import FilterColumn from './FilterColumn';
 
 // Create a mapping object for retailer names and their logos
 const retailerLogos = {
@@ -238,161 +239,122 @@ export default function List({items, selectedItems, setSelectedItems}) {
 
             <div className="list-container p-4 rounded-lg block relative border border-white/20 shadow-xl mt-8">
 
-                      {/* <Card /> */}
-                {/* <div className="card-container">
-                    <div className="card-item">
-                    <CardTemplate />
-                    </div>
-                    <div className="card-item">
-                    <CardTemplate />
-                    </div>
-                    <div className="card-item">
-                    <CardTemplate />
-                    </div>
-                </div> */}
-                {/* <div className='flex flex-col items-center'>
-                        
-                    <div className="filter-bar">
-                        <div className="dropdown-container">
-                            <div className="dropdown-display">{selectedOption1}</div>
-                            <div className="dropdown-menu">
-                                <div className="dropdown-item" onClick={() => handleSelect1('Lowest Unit Price')}>Lowest Unit Price</div>
-                                <div className="dropdown-item" onClick={() => handleSelect1('Price (Low to high)')}>Price (Low to high)</div>
-                                <div className="dropdown-item" onClick={() => handleSelect1('Price (High to low)')}>Price (High to low)</div>
+                <div className="list-content">
+                    {loading && (
+                        <div className="loading-indicator flex flex-col justify-center items-center space-y-2 mt-4 mb-4">
+                            <div className="w-8 h-8 border-4 border-blue-500 border-solid border-t-transparent rounded-full animate-spin"></div>
+                            <p className="text-blue-500 font-medium">Loading...</p>
+                        </div>
+                    )}
+
+
+                    {empty && (
+                        <div className="flex flex-col justify-center items-center space-y-4">
+                            {/* Funny GIF */}
+                            <img 
+                            src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExeHQ3aXR6eDhtNXpsZG95dDJhNXVmdnZpNDJqMnQ2OGFuejYwMGV6dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9dg/kfRPfxMScM8WGVPMJY/giphy.gif" 
+                            alt="Empty state funny gif" 
+                            className="w-64 h-64 object-cover rounded-lg shadow-lg" 
+                            />
+
+                            {/* Message */}
+                            <p className="text-lg text-gray-700 font-semibold">
+                            Oops! Looks like there's nothing here.
+                            </p>
+                            {/* <p className="text-gray-500">
+                            Maybe your data took a day off. 😄
+                            </p> */}
+                        </div>
+                    )}
+
+
+                    {!loading && (
+                        <div>
+
+
+                            <div className="heading-container" id="heading-container">
+                                <h2 className="heading">
+                                    &#128269; Browse {title[0]} {title[1]} Protein
+                                </h2>
                             </div>
-                        </div>
-                    </div>
-                </div> */}
+
+                            
 
 
-                {loading && (
-                    <div className="loading-indicator flex flex-col justify-center items-center space-y-2 mt-4 mb-4">
-                        <div className="w-8 h-8 border-4 border-blue-500 border-solid border-t-transparent rounded-full animate-spin"></div>
-                        <p className="text-blue-500 font-medium">Loading...</p>
-                    </div>
-                )}
+                            <br></br>
 
-
-                {empty && (
-                    <div className="flex flex-col justify-center items-center space-y-4">
-                        {/* Funny GIF */}
-                        <img 
-                        src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExeHQ3aXR6eDhtNXpsZG95dDJhNXVmdnZpNDJqMnQ2OGFuejYwMGV6dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9dg/kfRPfxMScM8WGVPMJY/giphy.gif" 
-                        alt="Empty state funny gif" 
-                        className="w-64 h-64 object-cover rounded-lg shadow-lg" 
-                        />
-
-                        {/* Message */}
-                        <p className="text-lg text-gray-700 font-semibold">
-                        Oops! Looks like there's nothing here.
-                        </p>
-                        {/* <p className="text-gray-500">
-                        Maybe your data took a day off. 😄
-                        </p> */}
-                    </div>
-                )}
-
-
-
-
-                {!loading && (
-                    <div>
-
-
-                        <div className="heading-container" id="heading-container">
-                            <h2 className="heading">
-                                &#128269; Browse {title[0]} {title[1]} Protein
-                            </h2>
-                        </div>
-
-                        
-
+                            <div className="header-bar" id="header-bar">
+                                <div className="header-container" onClick={() => requestSort('rating')}>
+                                    <span className="header-item">Rating</span> {getArrow('rating')}
+                                </div>
+                                <div className="header-container" onClick={() => requestSort('title')}>
+                                    <span className="header-item">Provider Name</span> {getArrow('title')}
+                                </div>
+                                <div className="header-container" onClick={() => requestSort('value')}>
+                                    <span className="header-item">Value</span> {getArrow('value')}
+                                </div>
+                                <div className="header-container" onClick={() => requestSort('weight')}>
+                                    <span className="header-item">Weight</span> {getArrow('weight')}
+                                </div>
+                                <div className="header-container" onClick={() => requestSort('currentPrice')}>
+                                    <span className="header-item">Price</span> {getArrow('currentPrice')}
+                                </div>
+                                <div className="header-container" onClick={() => requestSort('flavour')}>
+                                    <span className="header-item">Flavour</span> {getArrow('flavour')}
+                                </div>
+                                <div className="header-container" onClick={() => requestSort('category')}>
+                                    <span className="header-item">Flavour</span> {getArrow('category')}
+                                </div>
+                                <div className="header-container">
+                                    Compare
+                                </div>
+                            </div>
 
                         <br></br>
 
-                        <div className="header-bar" id="header-bar">
-                            <div className="header-container" onClick={() => requestSort('rating')}>
-                                <span className="header-item">Rating</span> {getArrow('rating')}
-                            </div>
-                            <div className="header-container" onClick={() => requestSort('title')}>
-                                <span className="header-item">Provider Name</span> {getArrow('title')}
-                            </div>
-                            <div className="header-container" onClick={() => requestSort('value')}>
-                                <span className="header-item">Value</span> {getArrow('value')}
-                            </div>
-                            <div className="header-container" onClick={() => requestSort('weight')}>
-                                <span className="header-item">Weight</span> {getArrow('weight')}
-                            </div>
-                            <div className="header-container" onClick={() => requestSort('currentPrice')}>
-                                <span className="header-item">Price</span> {getArrow('currentPrice')}
-                            </div>
-                            <div className="header-container" onClick={() => requestSort('flavour')}>
-                                <span className="header-item">Flavour</span> {getArrow('flavour')}
-                            </div>
-                            <div className="header-container" onClick={() => requestSort('category')}>
-                                <span className="header-item">Flavour</span> {getArrow('category')}
-                            </div>
-                            <div className="header-container">
-                                Compare
-                            </div>
+                            <table className="result-table">
+                                <tbody>
+                                    {currentRecords.map((result, index) => (
+                                    <ResultRowV2
+                                        key={result._id}
+                                        providername={result.title}
+                                        weight={result.weight}
+                                        price={result.currentPrice}
+                                        value={result.value}
+                                        logo={result.image}
+                                        link={result.url}
+                                        flavour={result.flavour}
+                                        category={result.category}
+                                        rating={result.rating}
+                                        rank={index + 1}
+                                        retailer={retailerLogos[result.retailer]}
+                                        selectedItems={selectedItems}
+                                        setSelectedItems={setSelectedItems}
+                                        uniqueId={`card-${result._id}`}
+                                        id={result._id}
+                                    />
+                                    ))}
+                                </tbody>
+                            </table>
+
+                            <br></br>
+                            
+
+                            
+                            {recordsDisplayed < sortedFiltered.length && (
+                                <div className='flex flex-col items-center'>
+                                    <button onClick={loadMoreRecords} className="load-more-button">
+                                        Load More
+                                    </button>
+                                </div>
+                            )}
+
+
+
                         </div>
-{/* 
-                        <div className="header-container">
-                        <div className="header-item">Header 1</div>
-                        <div className="header-item">Header 2</div>
-                        <div className="header-item">Header 3</div>
-                        <div className="header-item">Header 4</div>
-                        <div className="header-item">Header 5</div>
-                        <div className="header-item">Header 6</div>
-                        <div className="header-item">Header 7</div>
-                        <div className="header-item">Header 8</div>
-                        <div className="header-item">Header 9</div>
-                    </div> */}
+                    )}
 
-                    <br></br>
-
-                        <table className="result-table">
-                            <tbody>
-                                {currentRecords.map((result, index) => (
-                                <ResultRowV2
-                                    key={result._id}
-                                    providername={result.title}
-                                    weight={result.weight}
-                                    price={result.currentPrice}
-                                    value={result.value}
-                                    logo={result.image}
-                                    link={result.url}
-                                    flavour={result.flavour}
-                                    category={result.category}
-                                    rating={result.rating}
-                                    rank={index + 1}
-                                    retailer={retailerLogos[result.retailer]}
-                                    selectedItems={selectedItems}
-                                    setSelectedItems={setSelectedItems}
-                                    uniqueId={`card-${result._id}`}
-                                    id={result._id}
-                                />
-                                ))}
-                            </tbody>
-                        </table>
-
-                        <br></br>
-                        
-
-                        
-                        {recordsDisplayed < sortedFiltered.length && (
-                            <div className='flex flex-col items-center'>
-                                <button onClick={loadMoreRecords} className="load-more-button">
-                                    Load More
-                                </button>
-                            </div>
-                        )}
-
-
-
-                    </div>
-                )}
-
+                </div>
 
 
             </div>

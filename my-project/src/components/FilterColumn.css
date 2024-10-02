@@ -1,0 +1,114 @@
+.expand-button {
+    background-color: #00796b;
+    color: white;
+    border: none;
+    padding: 15px;
+    cursor: pointer;
+    z-index: 1001;
+    width: 100%; /* Full width button */
+    font-size: 1.2em; /* Larger text */
+}
+
+.filter-pane {
+    position: fixed;
+    top: 0;
+    left: -100%; /* Start off-screen */
+    width: 300px;
+    height: 100%;
+    background-color: #f0f0f0;
+    padding: 20px;
+    transition: left 0.3s ease;
+    z-index: 1000;
+}
+
+.filter-pane.expanded {
+    left: 0; /* Slide in */
+}
+
+.collapse-button {
+    background-color: #00796b;
+    color: white;
+    border: none;
+    padding: 15px;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.2em; /* Larger text */
+}
+
+.filter-content {
+    margin-top: 20px;
+}
+
+.filter-option {
+    margin-bottom: 15px;
+    font-size: 1.1em; /* Slightly larger text */
+}
+
+.dropdown-container {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    max-width: 300px;
+    min-width: 200px; /* Ensure minimum width to keep text on one row */
+}
+
+.dropdown-display {
+    background-color: transparent;
+    padding: 10px;
+    border-radius: 0; /* Sharp edges */
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid #ffffff;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.dropdown-display:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    z-index: 1;
+}
+
+.dropdown-container:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-item {
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid #ffffff;
+}
+
+.dropdown-item:hover {
+    background-color: #f2f2f2;
+}
+
+@media (max-width: 768px) {
+    .filter-pane {
+        width: 100%; /* Full width on mobile */
+        padding: 10px; /* Adjust padding */
+    }
+
+    .expand-button {
+        padding: 10px; /* Adjust padding */
+        font-size: 1em; /* Adjust text size */
+    }
+
+    .collapse-button {
+        padding: 10px; /* Adjust padding */
+        font-size: 1em; /* Adjust text size */
+    }
+
+    .filter-option {
+        font-size: 1em; /* Adjust text size */
+    }
+}

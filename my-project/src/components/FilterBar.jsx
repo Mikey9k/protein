@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './FilterBar.css';
+import FilterColumn from './FilterColumn';
 
 export default function FilterBar({sendDataToParent}) {
     const [selectedOption1, setSelectedOption1] = useState('Pick A Flavour');
@@ -22,35 +23,34 @@ export default function FilterBar({sendDataToParent}) {
     // };
 
     return (
-        <div className="filter-bar" id="filter-bar">
-            <div className="dropdown-container">
-                <div className="dropdown-display">{selectedOption1}</div>
-                <div className="dropdown-menu">
-                    <div className="dropdown-item" onClick={() => handleSelect1('Chocolate')}>Chocolate</div>
-                    <div className="dropdown-item" onClick={() => handleSelect1('Vanilla')}>Vanilla</div>
-                    <div className="dropdown-item" onClick={() => handleSelect1('Banana')}>Banana</div>
-                    <div className="dropdown-item" onClick={() => handleSelect1('Unflavoured')}>Unflavoured</div>
-                    <div className="dropdown-item" onClick={() => handleSelect1('All')}>All</div>
-                </div>
-            </div>
+        <div>
+            <FilterColumn />
 
-            <div className="dropdown-container">
-                <div className="dropdown-display">{selectedOption2}</div>
-                <div className="dropdown-menu">
-                    <div className="dropdown-item" onClick={() => handleSelect2('Whey Protein')}>Whey Protein</div>
-                    <div className="dropdown-item" onClick={() => handleSelect2('Plant Protein')}>Plant Protein</div>
-                    <div className="dropdown-item" onClick={() => handleSelect2('All')}>All</div>
-                </div>
-            </div>
+            {/* <div className="filter-bar" id="filter-bar">
 
-            {/* <div className="dropdown-container">
-                <div className="dropdown-display">{selectedOption3}</div>
-                <div className="dropdown-menu">
-                    <div className="dropdown-item" onClick={() => handleSelect3('Option 1')}>Option 1</div>
-                    <div className="dropdown-item" onClick={() => handleSelect3('Option 2')}>Option 2</div>
-                    <div className="dropdown-item" onClick={() => handleSelect3('Option 3')}>Option 3</div>
+
+                <div className="dropdown-container">
+                    <div className="dropdown-display">{selectedOption1}</div>
+                    <div className="dropdown-menu">
+                        <div className="dropdown-item" onClick={() => handleSelect1('Chocolate')}>Chocolate</div>
+                        <div className="dropdown-item" onClick={() => handleSelect1('Vanilla')}>Vanilla</div>
+                        <div className="dropdown-item" onClick={() => handleSelect1('Banana')}>Banana</div>
+                        <div className="dropdown-item" onClick={() => handleSelect1('Unflavoured')}>Unflavoured</div>
+                        <div className="dropdown-item" onClick={() => handleSelect1('All')}>All</div>
+                    </div>
                 </div>
+
+                <div className="dropdown-container">
+                    <div className="dropdown-display">{selectedOption2}</div>
+                    <div className="dropdown-menu">
+                        <div className="dropdown-item" onClick={() => handleSelect2('Whey Protein')}>Whey Protein</div>
+                        <div className="dropdown-item" onClick={() => handleSelect2('Plant Protein')}>Plant Protein</div>
+                        <div className="dropdown-item" onClick={() => handleSelect2('All')}>All</div>
+                    </div>
+                </div>
+
             </div> */}
+
         </div>
     );
 }

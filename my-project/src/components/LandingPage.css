@@ -46,3 +46,10 @@
     padding: 15px 30px;
     font-size: 1em;
 }
+
+
+.landing-button:hover {
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(255, 235, 59, 0.7);
+    font-size: 1.1em;
+}
