@@ -1,10 +1,7 @@
-/* App.css */
-
 .card-container {
   display: flex;
   justify-content: center;
   gap: 1rem;
-  /* padding: 1rem; */
   flex-wrap: wrap; /* Ensure wrapping on smaller screens */
   margin-top: -1rem;
 }
@@ -14,42 +11,33 @@
   max-width: 300px;
   box-sizing: border-box;
   display: inline-block;
-  /* margin-right: 10px; */
 }
 
 @media (max-width: 768px) {
   .card-container {
     gap: -5rem; /* Negative gap for mobile view */
     margin-bottom: 3rem;
-
   }
 
   .card-item {
     margin-bottom: -5rem; /* Negative margin for mobile view */
   }
 }
-  
+
 .courier {
   font-family: 'Courier New', Courier, monospace; /* Set font to Courier New */
   font-weight: bold; 
 }
 
-
 .heading-container {
   text-align: center;
-  /* margin: 20px 0; */
   margin-top: 20px;
-  /* margin-bottom: -3rem; */
 }
 
 .heading {
   font-size: 2rem;
   font-weight: bold;
   color: #1D4ED8;
-
-  /* padding: 10px 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
 }
 
 .white-separator {
@@ -74,16 +62,6 @@
   padding: 10px;
   height: 650px; /* Ensure the container height adjusts to the tallest card */
   scroll-behavior: smooth;
-}
-
-.card-container {
-  flex: 0 0 auto;
-  scroll-snap-align: start;
-  width: 80%; /* Adjust width for cards */
-}
-
-.card-item {
-  width: 100%;
 }
 
 .carousel-container::-webkit-scrollbar {
@@ -162,11 +140,6 @@
   align-items: center;
 }
 
-.header-container {
-  display: flex;
-  align-items: center;
-}
-
 .load-more-button {
   background-color: #007bff;
   color: white;
@@ -179,4 +152,47 @@
 
 .load-more-button:hover {
   background-color: #0056b3;
+}
+
+.header-bar {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr); /* Creates 8 equal-width columns */
+  /* gap: 10px; */
+  /* padding: 10px; */
+  width: 100%;
+  background-color: #f9f9f9;
+  /* margin-bottom: 10px; */
+  border: 1px solid #ddd;
+  /* border-radius: 8px; */
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* padding: 10px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px; */
+  padding: 10px;
+  text-align: center;
+  border-right: 1px solid #eee;
+  overflow: auto; /* Ensures content doesn't overflow */
+}
+
+.header-item {
+  flex: 1;
+  text-align: center;
+}
+
+.header-container:nth-of-type(2) {
+  grid-column: span 3;
+}
+
+.header-container:last-child {
+  border-right: none; /* Remove border on the last item */
+}
+
+.header-container:hover {
+  background-color: #f0f0f0; /* Change background color on hover */
 }

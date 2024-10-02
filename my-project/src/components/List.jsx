@@ -310,52 +310,48 @@ export default function List({items, selectedItems, setSelectedItems}) {
 
                         <br></br>
 
+                        <div className="header-bar">
+                            <div className="header-container" onClick={() => requestSort('rating')}>
+                                <span className="header-item">Rating</span> {getArrow('rating')}
+                            </div>
+                            <div className="header-container" onClick={() => requestSort('providername')}>
+                                <span className="header-item">Provider Name</span> {getArrow('providername')}
+                            </div>
+                            <div className="header-container" onClick={() => requestSort('value')}>
+                                <span className="header-item">Value</span> {getArrow('value')}
+                            </div>
+                            <div className="header-container" onClick={() => requestSort('weight')}>
+                                <span className="header-item">Weight</span> {getArrow('weight')}
+                            </div>
+                            <div className="header-container" onClick={() => requestSort('currentPrice')}>
+                                <span className="header-item">Price</span> {getArrow('currentPrice')}
+                            </div>
+                            <div className="header-container" onClick={() => requestSort('flavour')}>
+                                <span className="header-item">Flavour</span> {getArrow('flavour')}
+                            </div>
+                            <div className="header-container" onClick={() => requestSort('category')}>
+                                <span className="header-item">Flavour</span> {getArrow('category')}
+                            </div>
+                            <div className="header-container">
+                                Compare
+                            </div>
+                        </div>
+{/* 
+                        <div className="header-container">
+                        <div className="header-item">Header 1</div>
+                        <div className="header-item">Header 2</div>
+                        <div className="header-item">Header 3</div>
+                        <div className="header-item">Header 4</div>
+                        <div className="header-item">Header 5</div>
+                        <div className="header-item">Header 6</div>
+                        <div className="header-item">Header 7</div>
+                        <div className="header-item">Header 8</div>
+                        <div className="header-item">Header 9</div>
+                    </div> */}
+
+                    <br></br>
+
                         <table className="result-table">
-                            <thead>
-                                <tr>
-                                    <th onClick={() => requestSort('rating')}>
-                                        <div className="header-container">
-                                            <span>Rating</span> {getArrow('rating')}
-                                        </div>
-                                    </th>
-                                    <th onClick={() => requestSort('logo')}>
-                                        <div className="header-container">
-                                            <span>Logo</span> {getArrow('logo')}
-                                        </div>
-                                    </th>
-                                    <th onClick={() => requestSort('providername')}>
-                                        <div className="header-container">
-                                            <span>Provider Name</span> {getArrow('providername')}
-                                        </div>
-                                    </th>
-                                    <th onClick={() => requestSort('value')}>
-                                        <div className="header-container">
-                                            <span>Value</span> {getArrow('value')}
-                                        </div>
-                                    </th>
-                                    <th onClick={() => requestSort('weight')}>
-                                        <div className="header-container">
-                                            <span>Weight</span> {getArrow('weight')}
-                                        </div>
-                                    </th>
-                                    <th onClick={() => requestSort('currentPrice')}>
-                                        <div className="header-container">
-                                            <span>Price</span> {getArrow('currentPrice')}
-                                        </div>
-                                    </th>
-                                    <th onClick={() => requestSort('flavour')}>
-                                        <div className="header-container">
-                                            <span>Flavour</span> {getArrow('flavour')}
-                                        </div>
-                                    </th>
-                                    <th onClick={() => requestSort('category')}>
-                                        <div className="header-container">
-                                            <span>Category</span> {getArrow('category')}
-                                        </div>
-                                    </th>
-                                    <th>Compare</th>
-                                </tr>
-                            </thead>
                             <tbody>
                                 {currentRecords.map((result, index) => (
                                 <ResultRowV2
