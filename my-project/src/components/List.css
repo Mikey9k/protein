@@ -179,7 +179,7 @@
   color: white; /* Set text color to white */
   font-weight: bold; /* Make text bold */
   /* border-right: 1px solid #eee; */
-  overflow: auto; /* Ensures content doesn't overflow */
+  overflow: hidden; /* Ensures content doesn't overflow */
 }
 
 .header-item {
@@ -270,4 +270,10 @@
   .header-toggle {
     display: none; /* Hide the toggle button on larger screens */
   }
+
+  .list-container {
+    min-width: 1100px; /* Adjust as needed */
+    width: 100%;
+  }
 }
+

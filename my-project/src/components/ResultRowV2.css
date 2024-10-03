@@ -59,7 +59,7 @@
     padding: 10px;
     text-align: center;
     border-right: 1px solid #eee;
-    overflow: auto; /* Ensures content doesn't overflow */
+    overflow: hidden; /* Ensures content doesn't overflow */
 }
 
 
