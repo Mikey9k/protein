@@ -61,3 +61,74 @@
     border-right: 1px solid #eee;
     overflow: auto; /* Ensures content doesn't overflow */
 }
+
+
+@media (max-width: 800px) {
+    .result-row-v2 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, auto);
+        gap: 5px;
+        padding: 5px;
+        border: none;
+        border-radius: 0;
+        background-color: #fff;
+        border: 2px solid #0069e9;
+        border-radius: 8px;
+    }
+    .result-row-v2 .container-item {
+        border-right: none;
+        border-bottom: 1px solid #eee;
+        padding: 5px;
+    }
+    .result-row-v2 .container-item:last-child {
+        border-bottom: none;
+    }
+    .result-row-v2 .text-sm {
+        font-size: 0.75rem;
+    }
+    .result-row-v2 .font-medium {
+        font-weight: 400;
+    }
+    .result-row-v2 .text-gray-700 {
+        color: #333;
+    }
+
+    /* Switch the first and second rows */
+
+    .result-row-v2 .container-item:nth-child(2) {
+        order: 0;
+        grid-row: 1;
+    }
+
+    .result-row-v2 .container-item:nth-child(8) {
+        order: 1;
+        grid-row: 4;
+    }
+
+    /* Arrange rows 2 to 7 in two rows of three */
+    .result-row-v2 .container-item:nth-child(1) {
+        grid-column: 1;
+        grid-row: 2;
+    }
+    .result-row-v2 .container-item:nth-child(3) {
+        grid-column: 2;
+        grid-row: 2;
+    }
+    .result-row-v2 .container-item:nth-child(4) {
+        grid-column: 3;
+        grid-row: 2;
+    }
+    .result-row-v2 .container-item:nth-child(5) {
+        grid-column: 1;
+        grid-row: 3;
+    }
+    .result-row-v2 .container-item:nth-child(6) {
+        grid-column: 2;
+        grid-row: 3;
+    }
+    .result-row-v2 .container-item:nth-child(7) {
+        grid-column: 3;
+        grid-row: 3;
+    }
+}
