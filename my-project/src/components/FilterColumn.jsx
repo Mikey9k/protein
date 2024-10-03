@@ -41,8 +41,8 @@ export default function FilterColumn({ sendDataToParent }) {
         <>
             <div className="button-container">
                 <div className="filter-buttons">
-                    <button className="filter-button" onClick={handleChocolateLover}>Chocolate Lover</button>
-                    <button className="filter-button" onClick={handlePlantBasedFriendly}>Vegan Friendly</button>
+                    <button className="filter-button" onClick={handleChocolateLover}>Chocolate Lover 🍫</button>
+                    <button className="filter-button" onClick={handlePlantBasedFriendly}>Vegan Friendly 🌱</button>
                 </div>
                 <button className="expand-button" onClick={toggleExpand}>
                     {isExpanded ? 'Close Filters' : 'Open Filters'}
