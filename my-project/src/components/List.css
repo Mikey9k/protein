@@ -265,3 +265,9 @@
 
 
 }
+
+@media (min-width: 769px) {
+  .header-toggle {
+    display: none; /* Hide the toggle button on larger screens */
+  }
+}

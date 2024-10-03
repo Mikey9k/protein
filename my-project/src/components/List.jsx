@@ -317,7 +317,7 @@ export default function List({items, selectedItems, setSelectedItems}) {
                                     <span className="header-item">Flavour</span> {getArrow('flavour')}
                                 </div>
                                 <div className="header-container" onClick={() => requestSort('category')}>
-                                    <span className="header-item">Flavour</span> {getArrow('category')}
+                                    <span className="header-item">Category</span> {getArrow('category')}
                                 </div>
                                 <div className="header-container">
                                     Compare
