@@ -36,6 +36,12 @@ export default function List({items, selectedItems, setSelectedItems}) {
 
     const [recordsDisplayed, setRecordsDisplayed] = useState(10);
 
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+    const toggleDropdown = () => {
+        setIsDropdownOpen(!isDropdownOpen);
+    };
+
     const loadMoreRecords = () => {
         setRecordsDisplayed(recordsDisplayed + 10);
     };
@@ -287,7 +293,11 @@ export default function List({items, selectedItems, setSelectedItems}) {
 
                             <br></br>
 
-                            <div className="header-bar" id="header-bar">
+
+                            <div className="header-toggle" onClick={toggleDropdown}>
+                                {isDropdownOpen ? 'Hide Menu' : 'Show Menu'}
+                            </div>
+                            <div className={`header-bar ${isDropdownOpen ? 'open' : ''}`} id="header-bar">
                                 <div className="header-container" onClick={() => requestSort('rating')}>
                                     <span className="header-item">Rating</span> {getArrow('rating')}
                                 </div>

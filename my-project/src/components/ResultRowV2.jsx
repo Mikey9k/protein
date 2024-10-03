@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// import './ResultRowV2.css';
+import './ResultRowV2.css';
 
 const ResultRowV2 = ({ providername, weight, price, value, logo, link, flavour, category, rating, retailer, selectedItems, setSelectedItems, uniqueId, id }) => {
   const [isChecked, setIsChecked] = useState(selectedItems.some(item => item.id === id && item.checked));

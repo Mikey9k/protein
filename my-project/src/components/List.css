@@ -228,3 +228,40 @@
   font-size: 1.5rem;
   color: #333;
 } */
+
+@media (max-width: 768px) {
+  .header-bar {
+    display: none; /* Hide the header-bar by default on smaller screens */
+    flex-direction: column;
+    width: 50%; /* Make the header-bar less wide */
+    margin: 0 auto; /* Center the header-bar */
+  }
+
+  .header-bar.open {
+    display: flex; /* Show the header-bar when open class is added */
+  }
+
+  .header-container {
+    justify-content: center;
+    padding: 5px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .header-container:last-child {
+    display: none; /* Hide the last item on smaller screens */
+  }
+
+  .header-toggle {
+    display: block; /* Show the toggle button on smaller screens */
+    background-color: #13257c;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 8px;
+    width: 50%; /* Make the toggle button less wide */
+    margin: 0 auto; /* Center the toggle button */
+  }
+
+
+}
