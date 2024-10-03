@@ -29,11 +29,13 @@ export default function FilterColumn({ sendDataToParent }) {
 
     const handleChocolateLover = () => {
         setSelectedOption1('Chocolate');
+        setSelectedOption2('All');
         sendDataToParent(['Chocolate', 'All']);
     };
 
     const handlePlantBasedFriendly = () => {
         setSelectedOption2('Plant Protein');
+        setSelectedOption1('All');
         sendDataToParent(['All', 'Plant Protein']);
     };
 
