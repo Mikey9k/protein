@@ -241,10 +241,14 @@ export default function List({items, selectedItems, setSelectedItems}) {
 
                 <div className="list-content">
                     {loading && (
-                        <div className="loading-indicator flex flex-col justify-center items-center space-y-2 mt-4 mb-4">
-                            <div className="w-8 h-8 border-4 border-blue-500 border-solid border-t-transparent rounded-full animate-spin"></div>
-                            <p className="text-blue-500 font-medium">Loading...</p>
-                        </div>
+                        <>
+                            <div className="loading-overlay">
+                                <div className="loading-indicator flex flex-col justify-center items-center space-y-4 mt-8 mb-8">
+                                    <div className="w-16 h-16 border-8 border-blue-500 border-solid border-t-transparent rounded-full animate-spin"></div>
+                                    <p className="text-blue-500 font-medium text-lg">Loading...</p>
+                                </div>
+                            </div>
+                        </>
                     )}
 
 
@@ -268,7 +272,7 @@ export default function List({items, selectedItems, setSelectedItems}) {
                     )}
 
 
-                    {!loading && (
+                    {(
                         <div>
 
 

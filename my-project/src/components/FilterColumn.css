@@ -5,7 +5,7 @@
     padding: 15px;
     cursor: pointer;
     z-index: 1001;
-    width: 100%; /* Full width button */
+    width: 50%; /* Full width button */
     font-size: 1.2em; /* Larger text */
 }
 
@@ -92,23 +92,43 @@
     background-color: #f2f2f2;
 }
 
-@media (max-width: 768px) {
-    .filter-pane {
-        width: 100%; /* Full width on mobile */
-        padding: 10px; /* Adjust padding */
-    }
+.reset-button {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #f44336; /* Red color */
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  .reset-button:hover {
+    background-color: #d32f2f; /* Darker red on hover */
+  }
 
-    .expand-button {
-        padding: 10px; /* Adjust padding */
-        font-size: 1em; /* Adjust text size */
-    }
+/* FilterColumn.css */
+.filter-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Adjust the spacing between buttons as needed */
+}
 
-    .collapse-button {
-        padding: 10px; /* Adjust padding */
-        font-size: 1em; /* Adjust text size */
-    }
+.filter-button {
+    background-color: transparent;
+    padding: 10px;
+    border-radius: 0; /* Sharp edges */
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid #ffffff;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
 
-    .filter-option {
-        font-size: 1em; /* Adjust text size */
-    }
+.filter-button:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.button-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Adjust the spacing between buttons as needed */
 }

@@ -3,28 +3,37 @@ import './FilterBar.css';
 import FilterColumn from './FilterColumn';
 
 export default function FilterBar({sendDataToParent}) {
-    const [selectedOption1, setSelectedOption1] = useState('Pick A Flavour');
-    const [selectedOption2, setSelectedOption2] = useState('Pick a Category');
-    // const [selectedOption3, setSelectedOption3] = useState('Select an option');
+    const [datafromCrumb, setDataFromCrumb] = useState([]);
 
-    const handleSelect1 = (option) => {
-        setSelectedOption1(option);
-        sendDataToParent([option, selectedOption2]);
-    };
 
-    const handleSelect2 = (option) => {
-        setSelectedOption2(option);
-        sendDataToParent([selectedOption1, option]);
-    };
+    // const [selectedOption1, setSelectedOption1] = useState('Pick A Flavour');
+    // const [selectedOption2, setSelectedOption2] = useState('Pick a Category');
 
-    // const handleSelect3 = (option) => {
-    //     setSelectedOption3(option);
-    //     sendDataToParent([selectedOption1, selectedOption2]);
+
+    // const handleSelect1 = (option) => {
+    //     setSelectedOption1(option);
+    //     sendDataToParent([option, selectedOption2]);
     // };
+
+    // const handleSelect2 = (option) => {
+    //     setSelectedOption2(option);
+    //     sendDataToParent([selectedOption1, option]);
+    // };
+
+
+
+    const handleDataFromChild = (data) => {
+        setDataFromCrumb(data);
+        sendDataToParent(data);
+    };
+    
+
 
     return (
         <div>
-            <FilterColumn />
+            <FilterColumn sendDataToParent={handleDataFromChild}/>
+
+
 
             {/* <div className="filter-bar" id="filter-bar">
 
