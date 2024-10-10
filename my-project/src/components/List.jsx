@@ -21,7 +21,7 @@ import FilterColumn from './FilterColumn';
 const retailerLogos = {
     'Amazon': 'https://images.crowdspring.com/blog/wp-content/uploads/2023/07/03162944/amazon-logo-1.png',
     'Coles': 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Coles_logo.svg/2560px-Coles_logo.svg.png',
-    'Woolworths': 'https://pelicanwaterscommunity.com.au/wp-content/uploads/2017/11/Woolworths-logo.png',
+    'Woolworths': 'https://cdn.worldvectorlogo.com/logos/woolworths-5.svg',
     // Add more retailer names and their logos as needed
 };
 
