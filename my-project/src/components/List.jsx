@@ -19,7 +19,9 @@ import FilterColumn from './FilterColumn';
 
 // Create a mapping object for retailer names and their logos
 const retailerLogos = {
-    'Amazon': 'https://amazonau.gcs-web.com/sites/g/files/knoqqb24876/themes/site/nir_pid2259/dist/images/Amazon-logo-RGB-COLOR-HALF-01.png',
+    'Amazon': 'https://images.crowdspring.com/blog/wp-content/uploads/2023/07/03162944/amazon-logo-1.png',
+    'Coles': 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Coles_logo.svg/2560px-Coles_logo.svg.png',
+    'Woolworths': 'https://pelicanwaterscommunity.com.au/wp-content/uploads/2017/11/Woolworths-logo.png',
     // Add more retailer names and their logos as needed
 };
 
